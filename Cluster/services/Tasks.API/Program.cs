@@ -9,14 +9,21 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+var pathBase = "/tasks";
+app.UsePathBase(pathBase);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint($"{pathBase}/swagger/v1/swagger.json", "Tasks API V1");
+        c.RoutePrefix = "swagger";
+    });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

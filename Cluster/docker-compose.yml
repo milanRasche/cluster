@@ -48,4 +48,3 @@ services:
       dockerfile: services/Auth.API/Dockerfile
     expose:
     - "8080"
-
