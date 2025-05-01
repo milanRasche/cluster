@@ -1,0 +1,51 @@
+services:
+
+  gateway.api:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    build:
+      context: .
+      dockerfile: gateway/Gateway.API/Dockerfile
+    ports:
+        - 8080:8080
+    depends_on: 
+    - users.api
+    - tasks.api
+    - dashboard.api
+    - auth.api
+
+
+  users.api:
+    image: ${DOCKER_REGISTRY-}usersapi
+    build:
+      context: .
+      dockerfile: services/Users.API/Dockerfile
+    expose:
+    - "8080"
+
+
+  tasks.api:
+    image: ${DOCKER_REGISTRY-}tasksapi
+    build:
+      context: .
+      dockerfile: services/Tasks.API/Dockerfile
+    expose:
+    - "8080"
+
+
+  dashboard.api:
+    image: ${DOCKER_REGISTRY-}dashboardapi
+    build:
+      context: .
+      dockerfile: services/Dashboard.API/Dockerfile
+    expose:
+    - "8080"
+
+
+  auth.api:
+    image: ${DOCKER_REGISTRY-}authapi
+    build:
+      context: .
+      dockerfile: services/Auth.API/Dockerfile
+    expose:
+    - "8080"
+
