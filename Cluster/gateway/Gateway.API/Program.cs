@@ -15,7 +15,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/tasks/swagger/v1/swagger.json", "Tasks API");
     c.SwaggerEndpoint("/users/swagger/v1/swagger.json", "Users API");
     c.SwaggerEndpoint("/dashboard/swagger/v1/swagger.json", "Dashboard API");
-    c.SwaggerEndpoint("/auth/swagger/v1/swagger.json", "Users API");
+    c.SwaggerEndpoint("/auth/swagger/v1/swagger.json", "Auth  API");
 
     c.RoutePrefix = "";
 });

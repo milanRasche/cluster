@@ -12,7 +12,7 @@ services:
     - tasks.api
     - dashboard.api
     - auth.api
-
+    - mssql 
 
   users.api:
     image: ${DOCKER_REGISTRY-}usersapi
@@ -21,6 +21,8 @@ services:
       dockerfile: services/Users.API/Dockerfile
     expose:
     - "8080"
+    networks: 
+     - cluster_network
 
 
   tasks.api:
@@ -30,6 +32,8 @@ services:
       dockerfile: services/Tasks.API/Dockerfile
     expose:
     - "8080"
+    networks: 
+     - cluster_network
 
 
   dashboard.api:
@@ -39,6 +43,8 @@ services:
       dockerfile: services/Dashboard.API/Dockerfile
     expose:
     - "8080"
+    networks: 
+     - cluster_network
 
 
   auth.api:
@@ -48,3 +54,24 @@ services:
       dockerfile: services/Auth.API/Dockerfile
     expose:
     - "8080"
+    networks: 
+    - cluster_network
+    environment:
+    - ConnectionStrings__DefaultConnection=Server=mssql;Database=auth_db;User=sa;Password=TestPassword;TrustServerCertificate=True
+    depends_on:
+    - mssql
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=TestPassword
+    ports:
+     - "1433:1433"
+    networks: 
+     - cluster_network
+
+networks:
+  cluster_network:  
+    driver: bridge

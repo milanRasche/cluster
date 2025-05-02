@@ -1,54 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\GitRepos\\cluster\\Cluster\\",
+  "WorkspaceRootPath": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\gitrepos\\cluster\\cluster\\services\\auth.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\auth.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|solutionrelative:services\\auth.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0E76A6E-5C3F-4E62-B0DA-E5682A8A083E}|services\\Dashboard.API\\Dashboard.API.csproj|c:\\gitrepos\\cluster\\cluster\\services\\dashboard.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B0E76A6E-5C3F-4E62-B0DA-E5682A8A083E}|services\\Dashboard.API\\Dashboard.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\dashboard.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B0E76A6E-5C3F-4E62-B0DA-E5682A8A083E}|services\\Dashboard.API\\Dashboard.API.csproj|solutionrelative:services\\dashboard.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22B640BC-0B40-42BA-B468-48CB7F5A6483}|services\\Users.API\\Users.API.csproj|c:\\gitrepos\\cluster\\cluster\\services\\users.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22B640BC-0B40-42BA-B468-48CB7F5A6483}|services\\Users.API\\Users.API.csproj|solutionrelative:services\\users.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\auth.api\\objects\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|solutionrelative:services\\auth.api\\objects\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{43FD28F9-C663-43BC-89B4-31850A300F2D}|services\\Tasks.API\\Tasks.API.csproj|c:\\gitrepos\\cluster\\cluster\\services\\tasks.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43FD28F9-C663-43BC-89B4-31850A300F2D}|services\\Tasks.API\\Tasks.API.csproj|solutionrelative:services\\tasks.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|c:\\gitrepos\\cluster\\cluster\\gateway\\gateway.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\gateway\\gateway.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|solutionrelative:gateway\\gateway.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|c:\\gitrepos\\cluster\\cluster\\gateway\\gateway.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\gateway\\gateway.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|solutionrelative:gateway\\gateway.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22B640BC-0B40-42BA-B468-48CB7F5A6483}|services\\Users.API\\Users.API.csproj|c:\\gitrepos\\cluster\\cluster\\services\\users.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{22B640BC-0B40-42BA-B468-48CB7F5A6483}|services\\Users.API\\Users.API.csproj|solutionrelative:services\\users.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\gateway\\gateway.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|solutionrelative:gateway\\gateway.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0E76A6E-5C3F-4E62-B0DA-E5682A8A083E}|services\\Dashboard.API\\Dashboard.API.csproj|c:\\gitrepos\\cluster\\cluster\\services\\dashboard.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B0E76A6E-5C3F-4E62-B0DA-E5682A8A083E}|services\\Dashboard.API\\Dashboard.API.csproj|solutionrelative:services\\dashboard.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\gateway\\gateway.api\\gateway.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|solutionrelative:gateway\\gateway.api\\gateway.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\gitrepos\\cluster\\cluster\\docker-compose.override.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.override.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\gitrepos\\cluster\\cluster\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\gitrepos\\cluster\\cluster\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\docker-compose.dcproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.dcproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|c:\\gitrepos\\cluster\\cluster\\gateway\\gateway.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B4AF19AA-1BBB-4C3C-B1CB-675F8DCF5D85}|gateway\\Gateway.API\\Gateway.API.csproj|solutionrelative:gateway\\gateway.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\auth.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|solutionrelative:services\\auth.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\auth.api\\controllers\\userauthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|solutionrelative:services\\auth.api\\controllers\\userauthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\auth.api\\dtos\\userregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|solutionrelative:services\\auth.api\\dtos\\userregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\auth.api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|solutionrelative:services\\auth.api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\services\\auth.api\\dtos\\userloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1A7CB90-07DE-4F68-BF80-7BF5539F728B}|services\\Auth.API\\Auth.API.csproj|solutionrelative:services\\auth.api\\dtos\\userloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,163 +66,179 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\services\\Tasks.API\\Program.cs",
-              "RelativeDocumentMoniker": "services\\Tasks.API\\Program.cs",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\services\\Tasks.API\\Program.cs",
-              "RelativeToolTip": "services\\Tasks.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Program.cs",
+              "RelativeDocumentMoniker": "gateway\\Gateway.API\\Program.cs",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Program.cs",
+              "RelativeToolTip": "gateway\\Gateway.API\\Program.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAEwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T12:45:38.738Z",
+              "WhenOpened": "2025-05-01T23:18:16.283Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Program.cs",
-              "RelativeDocumentMoniker": "gateway\\Gateway.API\\Program.cs",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Program.cs",
-              "RelativeToolTip": "gateway\\Gateway.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T12:37:09.647Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\services\\Users.API\\Program.cs",
-              "RelativeDocumentMoniker": "services\\Users.API\\Program.cs",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\services\\Users.API\\Program.cs",
-              "RelativeToolTip": "services\\Users.API\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T12:46:45.498Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\services\\Dashboard.API\\Dockerfile",
-              "RelativeDocumentMoniker": "services\\Dashboard.API\\Dockerfile",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\services\\Dashboard.API\\Dockerfile",
-              "RelativeToolTip": "services\\Dashboard.API\\Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAB7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-01T12:46:19.405Z",
-              "EditorCaption": ""
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\appsettings.json",
+              "RelativeDocumentMoniker": "gateway\\Gateway.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\appsettings.json",
+              "RelativeToolTip": "gateway\\Gateway.API\\appsettings.json",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-01T23:19:33.963Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "docker-compose.override.yml",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\docker-compose.override.yml",
-              "RelativeDocumentMoniker": "docker-compose.override.yml",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\docker-compose.override.yml",
-              "RelativeToolTip": "docker-compose.override.yml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAmwDQAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2025-05-01T12:44:38.5Z",
-              "EditorCaption": ""
+              "Title": "docker-compose.dcproj",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\docker-compose.dcproj",
+              "RelativeDocumentMoniker": "docker-compose.dcproj",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\docker-compose.dcproj",
+              "RelativeToolTip": "docker-compose.dcproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-01T23:19:26.293Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\services\\Dashboard.API\\Program.cs",
-              "RelativeDocumentMoniker": "services\\Dashboard.API\\Program.cs",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\services\\Dashboard.API\\Program.cs",
-              "RelativeToolTip": "services\\Dashboard.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABLAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAD8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-05-01T23:13:39.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserAuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Controllers\\UserAuthController.cs",
+              "RelativeDocumentMoniker": "services\\Auth.API\\Controllers\\UserAuthController.cs",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Controllers\\UserAuthController.cs",
+              "RelativeToolTip": "services\\Auth.API\\Controllers\\UserAuthController.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAowDYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T12:46:22.109Z",
+              "WhenOpened": "2025-05-01T21:34:47.206Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserLoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\DTOs\\UserLoginRequest.cs",
+              "RelativeDocumentMoniker": "services\\Auth.API\\DTOs\\UserLoginRequest.cs",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\DTOs\\UserLoginRequest.cs",
+              "RelativeToolTip": "services\\Auth.API\\DTOs\\UserLoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T21:32:56.212Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserRegisterRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\DTOs\\UserRegisterRequest.cs",
+              "RelativeDocumentMoniker": "services\\Auth.API\\DTOs\\UserRegisterRequest.cs",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\DTOs\\UserRegisterRequest.cs",
+              "RelativeToolTip": "services\\Auth.API\\DTOs\\UserRegisterRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T21:31:38.378Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\appsettings.json",
+              "RelativeDocumentMoniker": "services\\Auth.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\appsettings.json",
+              "RelativeToolTip": "services\\Auth.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-01T21:16:40.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Objects\\User.cs",
+              "RelativeDocumentMoniker": "services\\Auth.API\\Objects\\User.cs",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Objects\\User.cs",
+              "RelativeToolTip": "services\\Auth.API\\Objects\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T20:56:50.574Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\services\\Auth.API\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Program.cs",
               "RelativeDocumentMoniker": "services\\Auth.API\\Program.cs",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\services\\Auth.API\\Program.cs",
-              "RelativeToolTip": "services\\Auth.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABGAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Program.cs*",
+              "RelativeToolTip": "services\\Auth.API\\Program.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T12:46:38.442Z",
+              "WhenOpened": "2025-05-01T20:56:03.806Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "docker-compose.yml",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\docker-compose.yml",
-              "RelativeDocumentMoniker": "docker-compose.yml",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\docker-compose.yml",
-              "RelativeToolTip": "docker-compose.yml",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAmwDEAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2025-05-01T12:44:37.566Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\launchSettings.json",
-              "RelativeDocumentMoniker": "launchSettings.json",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\launchSettings.json",
-              "RelativeToolTip": "launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-01T12:43:25.683Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Dockerfile",
-              "RelativeDocumentMoniker": "gateway\\Gateway.API\\Dockerfile",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Dockerfile",
-              "RelativeToolTip": "gateway\\Gateway.API\\Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-01T12:42:58.955Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\gateway\\Gateway.API\\appsettings.json",
-              "RelativeDocumentMoniker": "gateway\\Gateway.API\\appsettings.json",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\gateway\\Gateway.API\\appsettings.json",
-              "RelativeToolTip": "gateway\\Gateway.API\\appsettings.json",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAACwAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-01T12:42:50.781Z",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Dashboard.API\\Program.cs",
+              "RelativeDocumentMoniker": "services\\Dashboard.API\\Program.cs",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Dashboard.API\\Program.cs",
+              "RelativeToolTip": "services\\Dashboard.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T08:24:51.394Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\services\\Users.API\\appsettings.json",
-              "RelativeDocumentMoniker": "services\\Users.API\\appsettings.json",
-              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\services\\Users.API\\appsettings.json",
-              "RelativeToolTip": "services\\Users.API\\appsettings.json",
+              "Title": "Gateway.API.http",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Gateway.API.http",
+              "RelativeDocumentMoniker": "gateway\\Gateway.API\\Gateway.API.http",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Gateway.API.http",
+              "RelativeToolTip": "gateway\\Gateway.API\\Gateway.API.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-05-01T23:19:48.092Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Dockerfile",
+              "RelativeDocumentMoniker": "gateway\\Gateway.API\\Dockerfile",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\gateway\\Gateway.API\\Dockerfile",
+              "RelativeToolTip": "gateway\\Gateway.API\\Dockerfile",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-01T12:47:15.058Z",
-              "EditorCaption": ""
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-01T23:20:29.782Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "services\\Auth.API\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\services\\Auth.API\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "services\\Auth.API\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T21:08:03.824Z"
             }
           ]
         }
