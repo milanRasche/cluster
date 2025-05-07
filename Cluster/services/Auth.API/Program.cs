@@ -1,5 +1,7 @@
 using Auth.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
 
-var pathBase = "/Auth";
+var pathBase = "/auth";
 app.UsePathBase(pathBase);
 
 // Configure the HTTP request pipeline.

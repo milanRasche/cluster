@@ -8,7 +8,8 @@
         "tasks.api": "StartDebugging",
         "auth.api": "StartDebugging",
         "dashboard.api": "StartDebugging",
-        "gateway.api": "StartDebugging"
+        "gateway.api": "StartDebugging",
+        "clusterfrontend": "StartDebugging"
       }
     }
   }

@@ -13,6 +13,8 @@ services:
     - dashboard.api
     - auth.api
     - mssql 
+    networks: 
+     - cluster_network
 
   users.api:
     image: ${DOCKER_REGISTRY-}usersapi
@@ -57,7 +59,7 @@ services:
     networks: 
     - cluster_network
     environment:
-    - ConnectionStrings__DefaultConnection=Server=mssql;Database=auth_db;User=sa;Password=TestPassword;TrustServerCertificate=True
+    - ConnectionStrings__DefaultConnection=Server=mssql;Database=auth_db;User=sa;Password=TestPassword123;TrustServerCertificate=True
     depends_on:
     - mssql
 
@@ -66,12 +68,18 @@ services:
     container_name: mssql
     environment:
      - ACCEPT_EULA=Y
-     - SA_PASSWORD=TestPassword
+     - SA_PASSWORD=TestPassword123
     ports:
      - "1433:1433"
     networks: 
      - cluster_network
 
+  clusterfrontend:
+    image: ${DOCKER_REGISTRY-}clusterfrontend
+    build:
+      context: .
+      dockerfile: frontend/ClusterFrontend/ClusterFrontend/Dockerfile
+
 networks:
-  cluster_network:  
+  cluster_network:
     driver: bridge
