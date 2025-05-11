@@ -1,0 +1,43 @@
+﻿@page "/register"
+@inject AuthService AuthService
+@inject NavigationManager NavManager
+
+
+<h3 class="text-2xl font-semibold mb-4">Register</h3>
+
+<div class="space-y-4">
+    <form @onsubmit="RegisterUser">
+        <input @bind="user.UserName" placeholder="Username" class="w-full p-2 border rounded-xl" />
+        <input @bind="user.UserEmail" placeholder="Email" type="email" class="w-full p-2 border rounded-xl" />
+        <input @bind="user.Password" placeholder="Password" type="password" class="w-full p-2 border rounded-xl" />
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-xl">Register</button>
+    </form>
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="text-red-600">@errorMessage</div>
+    }
+</div>
+
+@code {
+    private UserRegisterRequest user = new();
+    private string errorMessage = string.Empty;
+
+    private async Task RegisterUser()
+    {
+        try
+        {
+            if (await AuthService.Register(user))
+            {
+                NavManager.NavigateTo("/login");
+            }
+            else
+            {
+                errorMessage = "Registration failed. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}

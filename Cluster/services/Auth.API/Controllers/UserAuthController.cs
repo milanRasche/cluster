@@ -1,21 +1,26 @@
 ﻿using Auth.API.Data;
 using Auth.API.DTOs;
+using Auth.API.Interfaces;
 using Auth.API.Objects;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace Auth.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserAuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        
-        public UserAuthController(ApplicationDbContext context)
+        private readonly IPasswordHasher _passwordHasher;
+
+        public UserAuthController(ApplicationDbContext context, IPasswordHasher passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         [HttpPost("register")]
@@ -26,7 +31,7 @@ namespace Auth.API.Controllers
                 return BadRequest("User already exists.");
             }
 
-            var hashedPassword =  HashPassword(request.Password);
+            var hashedPassword = _passwordHasher.HashPassword(request.Password);
 
             var user = new User
             {
@@ -45,22 +50,10 @@ namespace Auth.API.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.UserEmail == request.UserEmail);
-            if (user == null || !VerifyPassword(request.Password, user.PasswordHash))
+            if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.PasswordHash))
                 return Unauthorized("Invalid credentials.");
 
             return Ok(new { user.UUID, user.UserName, user.UserEmail });
-        }
-
-
-
-        private string HashPassword(string password)
-        {
-            return "";
-        }
-
-        private bool VerifyPassword(string password, string hash)
-        {
-            return HashPassword(password) == hash;
         }
     }
 }

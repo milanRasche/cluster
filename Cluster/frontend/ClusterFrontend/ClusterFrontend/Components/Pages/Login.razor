@@ -1,0 +1,43 @@
+﻿@page "/login"
+@inject AuthService AuthService
+@inject NavigationManager NavManager
+
+<h3 class="text-2xl font-semibold mb-4">Login</h3>
+
+<div class="space-y-4">
+    <input @bind="loginRequest.UserEmail" placeholder="Email" type="email" class="w-full p-2 border rounded-xl" />
+    <input @bind="loginRequest.Password" placeholder="Password" type="password" class="w-full p-2 border rounded-xl" />
+    <button @onclick="LoginUser" class="w-full bg-blue-600 text-white py-2 rounded-xl">Login</button>
+</div>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <p class="text-red-600 mt-2">@errorMessage</p>
+}
+
+<p class="text-sm mt-4">Don't have an account? <a href="/register" class="text-blue-600">Register here</a></p>
+
+@code {
+    private UserLoginRequest loginRequest = new();
+    private string errorMessage = string.Empty;
+
+    private async Task LoginUser()
+    {
+        try
+        {
+            var userInfo = await AuthService.Login(loginRequest);
+            if (userInfo != null)
+            {
+                NavManager.NavigateTo("/");
+            }
+            else
+            {
+                errorMessage = "Invalid credentials. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}
