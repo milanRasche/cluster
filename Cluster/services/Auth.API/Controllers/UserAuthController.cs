@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System.Security.Cryptography;
 
 namespace Auth.API.Controllers
@@ -35,7 +36,7 @@ namespace Auth.API.Controllers
 
             var user = new User
             {
-                UserName = request.UserName,
+                Username = request.Username,
                 UserEmail = request.UserEmail,
                 PasswordHash = hashedPassword,
             };
@@ -53,7 +54,7 @@ namespace Auth.API.Controllers
             if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.PasswordHash))
                 return Unauthorized("Invalid credentials.");
 
-            return Ok(new { user.UUID, user.UserName, user.UserEmail });
+            return Ok(new { user.UUID, user.Username, user.UserEmail });
         }
     }
 }

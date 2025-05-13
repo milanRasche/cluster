@@ -11,12 +11,12 @@ namespace Auth.API.Objects
         public string UUID { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
-        public string UserName { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [Required, EmailAddress]
-        public string UserEmail { get; set; }
+        public string UserEmail { get; set; } = string.Empty;
 
         [Required]
-        public string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } = string.Empty;
     }
 }

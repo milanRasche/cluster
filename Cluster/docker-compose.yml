@@ -79,6 +79,10 @@ services:
     build:
       context: .
       dockerfile: frontend/ClusterFrontend/ClusterFrontend/Dockerfile
+    ports:
+      - "5002:5002"
+    networks:
+      - cluster_network
 
 networks:
   cluster_network:

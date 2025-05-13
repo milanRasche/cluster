@@ -1,4 +1,5 @@
 using ClusterFrontend.Components;
+using ClusterFrontend.Interface;
 using ClusterFrontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,12 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddScoped<AuthService>();
-
-builder.Services.AddHttpClient<AuthService>(client =>
-{
-    client.BaseAddress = new Uri("https://localhost:8080/UserAuth/");
-});
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 

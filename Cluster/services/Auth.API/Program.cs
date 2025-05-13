@@ -1,4 +1,6 @@
 using Auth.API.Data;
+using Auth.API.Interfaces;
+using Auth.API.Logic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -23,6 +25,8 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+builder.Services.AddScoped<IPasswordHasher, SHA256PasswordHasher>();
 
 var app = builder.Build();
 
