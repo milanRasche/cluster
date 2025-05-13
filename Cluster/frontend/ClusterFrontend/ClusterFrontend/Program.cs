@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveWebAssemblyComponents();
+    .AddInteractiveServerComponents();
 
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -35,7 +35,6 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(ClusterFrontend.Client._Imports).Assembly);
+    .AddInteractiveServerRenderMode();
 
 app.Run();

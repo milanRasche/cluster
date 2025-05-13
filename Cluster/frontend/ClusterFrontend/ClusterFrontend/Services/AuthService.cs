@@ -3,6 +3,11 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text;
 using ClusterFrontend.Interface;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace ClusterFrontend.Services
 {
@@ -14,22 +19,20 @@ namespace ClusterFrontend.Services
         public AuthService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
-           // _apiBaseUrl = configuration.GetValue<string>("ApiBaseUrl");
+            _httpClient.BaseAddress = new Uri(AuthApiURL);
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
         }
-
+        
         public async Task<bool> Register(UserRegisterRequest request)
         {
             try
             {
-                var jsonContent = new StringContent(
-                    JsonSerializer.Serialize(request),
-                    Encoding.UTF8,
-                    "application/json"
-                );
+                string jsonContent = JsonSerializer.Serialize(request);
 
                 var response = await _httpClient.PostAsync(
-                    $"{AuthApiURL}/register",
-                    jsonContent);
+                    "http://gateway.api:8080/auth/UserAuth/register",
+                    new StringContent(jsonContent, Encoding.UTF8, "application/json")
+                );
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -48,14 +51,58 @@ namespace ClusterFrontend.Services
 
         public async Task<UserInfo?> Login(UserLoginRequest request)
         {
-            var response = await _httpClient.PostAsJsonAsync($"{AuthApiURL}/login", request);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return await response.Content.ReadFromJsonAsync<UserInfo?>();
-            }
+                string jsonContent = JsonSerializer.Serialize(request);
 
-            return null;
+                var response = await _httpClient.PostAsync(
+                    $"/login",
+                    new StringContent(jsonContent, Encoding.UTF8, "application/json")
+                );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<UserInfo?>();
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Login failed with status {response.StatusCode}: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"API request failed: {ex.Message}");
+                return null;
+            }
         }
 
+        public async Task<UserInfo?> RefreshToken(RefreshRequest refreshRequest)
+        {
+            try
+            {
+                string jsonContent = JsonSerializer.Serialize(refreshRequest);
+
+                var response = await _httpClient.PostAsync(
+                    $"/refresh-token",
+                    new StringContent(jsonContent, Encoding.UTF8, "application/json")
+                );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<UserInfo?>();
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Token refresh failed with status {response.StatusCode}: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"API request failed: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@page "/login"
 @using ClusterFrontend.DTOs
+@using ClusterFrontend.Services
+@using ClusterFrontend.Interface
 
 <EditForm Model="@LoginModel" OnValidSubmit="@HandleLogin" FormName="loginForm">
     <DataAnnotationsValidator />
@@ -36,7 +38,7 @@
     private NavigationManager NavigationManager { get; set; } = null!;
 
     [Inject]
-    private AuthService AuthService { get; set; } = null!;
+    private IAuthService AuthService { get; set; } = null!;
 
     private async Task HandleLogin()
     {

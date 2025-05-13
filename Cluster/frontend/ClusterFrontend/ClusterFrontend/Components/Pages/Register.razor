@@ -1,56 +1,58 @@
 ﻿@page "/register"
+@using ClusterFrontend.Services
+@using ClusterFrontend.Interface
+@inject NavigationManager NavigationManager
 @inject IAuthService AuthService
-@using ClusterFrontend.DTOs
+@rendermode InteractiveServer
 
-<EditForm Model="@RegisterModel" OnValidSubmit="@HandleRegistration" FormName="registerForm">
-    <DataAnnotationsValidator />
-
-    <div class="form-group">
-        <label for="username">Username</label>
-        <InputText id="username" @bind-Value="RegisterModel.Username" />
-        <ValidationMessage For="@(() => RegisterModel.Username)" />
+<EditForm Model="@registerModel" OnValidSubmit="@HandleRegistration" FormName="Register">
+    <div>
+        <h3 style="font-weight:bold; color:purple">Cluster Register</h3>
     </div>
-
-    <div class="form-group">
-        <label for="email">Email</label>
-        <InputText id="email" @bind-Value="RegisterModel.UserEmail" />
-        <ValidationMessage For="@(() => RegisterModel.UserEmail)" />
+    <br />
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="registerModel.Username" placeholder="Username" />
     </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <InputText id="password" @bind-Value="RegisterModel.Password" type="password" />
-        <ValidationMessage For="@(() => RegisterModel.Password)" />
+    <br />
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="registerModel.UserEmail" placeholder="Email address" />
     </div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
+    <br />
+    <div class="col-12 row">
+        <input type="password" class="form-control col-12" @bind="registerModel.Password" placeholder="Password" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <input type="submit" class="form-control col-6 btn btn-primary" value="Register" />
+        <a href="/login" class="col-6">Already registered?</a>
+    </div>
+    <br />
+    <div class="col-12 row" style="text-align:left; font-weight:bold">
+        <span class="col-12">@ErrorMessage</span>
+    </div>
 </EditForm>
 
-@if (ErrorMessage != null)
-{
-    <div class="alert alert-danger mt-4">@ErrorMessage</div>
-}
-
 @code {
-    private UserRegisterRequest RegisterModel { get; set; } = new();
-    private string? ErrorMessage { get; set; }
+    private UserRegisterRequest registerModel;
+    private string ErrorMessage { get; set; }
 
-    [Inject]
-    private NavigationManager NavigationManager { get; set; } = null!;
+    protected override void OnInitialized()
+    {
+        registerModel = new UserRegisterRequest();
+    }
 
     private async Task HandleRegistration()
     {
         try
         {
-            var success = await AuthService.Register(RegisterModel);
-
+            var success = await AuthService.Register(registerModel);
             if (success)
             {
                 NavigationManager.NavigateTo("/login");
             }
             else
             {
-                ErrorMessage = $"Registration failed. {success}.";
+                ErrorMessage = "Invalid registration details. Please try again.";
             }
         }
         catch (Exception ex)
