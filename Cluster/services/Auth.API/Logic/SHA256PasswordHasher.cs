@@ -31,8 +31,8 @@ namespace Auth.API.Logic
             if (parts.Length != 2)
                 return false;
 
-            byte[] salt = Convert.FromHexString(parts[0]);
-            byte[] storedHash = Convert.FromHexString(parts[1]);
+            byte[] salt = Convert.FromHexString(parts[1]);
+            byte[] storedHash = Convert.FromHexString(parts[0]);
 
             byte[] computedHash = KeyDerivation.Pbkdf2(
                 password: password,

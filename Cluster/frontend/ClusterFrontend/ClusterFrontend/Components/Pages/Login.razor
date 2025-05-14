@@ -1,50 +1,50 @@
 ﻿@page "/login"
-@using ClusterFrontend.DTOs
 @using ClusterFrontend.Services
 @using ClusterFrontend.Interface
+@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+@rendermode InteractiveServer
 
-<EditForm Model="@LoginModel" OnValidSubmit="@HandleLogin" FormName="loginForm">
-    <DataAnnotationsValidator />
-
-    <div class="form-group">
-        <label for="useremail">Email</label>
-        <InputText id="useremail" @bind-Value="LoginModel.UserEmail" />
-        <ValidationMessage For="@(() => LoginModel.UserEmail)" />
+<EditForm Model="@loginModel" OnValidSubmit="@HandleLogin" FormName="Login">
+    <div>
+        <h3 style="font-weight:bold; color:purple">Cluster Login</h3>
     </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <InputText id="password" @bind-Value="LoginModel.Password" type="password" />
-        <ValidationMessage For="@(() => LoginModel.Password)" />
+    <br />
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="loginModel.UserEmail" placeholder="Email address" />
     </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>    
-
-    <div class="mt-2">
-        Don't have an account? <a href="/register">Register here</a>
+    <br />
+    <div class="col-12 row">
+        <input type="password" class="form-control col-12" @bind="loginModel.Password" placeholder="Password" />
     </div>
+    <br />
+    <div class="col-12 row">
+        <input type="submit" class="form-control col-6 btn btn-primary" value="Login" />
+        <a href="/register" class="col-6">Don't have an account? Register here</a>
+    </div>
+    <br />
+    @if (ErrorMessage != null)
+    {
+        <div class="col-12 row" style="text-align:left; font-weight:bold">
+            <span class="col-12">@ErrorMessage</span>
+        </div>
+    }
 </EditForm>
 
-@if (ErrorMessage != null)
-{
-    <div class="alert alert-danger mt-4">@ErrorMessage</div>
-}
-
 @code {
-    private UserLoginRequest LoginModel { get; set; } = new();
+    private UserLoginRequest loginModel;
     private string? ErrorMessage { get; set; }
 
-    [Inject]
-    private NavigationManager NavigationManager { get; set; } = null!;
-
-    [Inject]
-    private IAuthService AuthService { get; set; } = null!;
+    protected override void OnInitialized()
+    {
+        loginModel = new UserLoginRequest();
+    }
 
     private async Task HandleLogin()
     {
         try
         {
-            var userInfo = await AuthService.Login(LoginModel);
+            var userInfo = await AuthService.Login(loginModel);
 
             if (userInfo != null)
             {

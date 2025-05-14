@@ -1,38 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\",
+  "WorkspaceRootPath": "C:\\GitRepos\\cluster\\Cluster\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\dtos\\userregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\dtos\\userregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\gitrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\dtos\\userloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\dtos\\userloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\gitrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\interface\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\interface\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\gitrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A605B2FC-3CB3-407B-BCC0-D428C4C4CAA1}|frontend\\ClusterFrontend\\ClusterFrontend.Client\\ClusterFrontend.Client.csproj|c:\\users\\milan\\source\\githubrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\gitrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\gitrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A605B2FC-3CB3-407B-BCC0-D428C4C4CAA1}|frontend\\ClusterFrontend\\ClusterFrontend.Client\\ClusterFrontend.Client.csproj|c:\\gitrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A605B2FC-3CB3-407B-BCC0-D428C4C4CAA1}|frontend\\ClusterFrontend\\ClusterFrontend.Client\\ClusterFrontend.Client.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend.client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|c:\\gitrepos\\cluster\\cluster\\frontend\\clusterfrontend\\clusterfrontend\\dtos\\userregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{475EDD76-FC64-48F7-A6DD-C547839AFC99}|frontend\\ClusterFrontend\\ClusterFrontend\\ClusterFrontend.csproj|solutionrelative:frontend\\clusterfrontend\\clusterfrontend\\dtos\\userregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,67 +38,53 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserLoginRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserLoginRequest.cs",
-              "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserLoginRequest.cs",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserLoginRequest.cs",
-              "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserLoginRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T20:22:29.75Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Interface\\IAuthService.cs",
-              "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\Interface\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Interface\\IAuthService.cs",
-              "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\Interface\\IAuthService.cs",
+              "DocumentIndex": 2,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\Components\\_Imports.razor",
+              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\_Imports.razor",
+              "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\Components\\_Imports.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T20:05:08.883Z",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-14T08:58:52.642Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Login.razor",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Login.razor",
+              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Login.razor",
               "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Login.razor",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Login.razor",
+              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Login.razor",
               "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Login.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-05-13T16:06:17.933Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Program.cs",
+              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Program.cs",
               "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\Program.cs",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Program.cs",
+              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Program.cs",
               "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T16:04:06.507Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T16:04:06.507Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend.Client\\Program.cs",
+              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend.Client\\Program.cs",
               "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend.Client\\Program.cs",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend.Client\\Program.cs",
+              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend.Client\\Program.cs",
               "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend.Client\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -112,37 +94,36 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Register.razor",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Register.razor",
+              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Register.razor",
               "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Register.razor",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Register.razor",
+              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Register.razor",
               "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\Components\\Pages\\Register.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-05-13T16:02:56.927Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "UserRegisterRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserRegisterRequest.cs",
+              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserRegisterRequest.cs",
               "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserRegisterRequest.cs",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserRegisterRequest.cs",
+              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserRegisterRequest.cs",
               "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\DTOs\\UserRegisterRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T16:02:55.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T16:02:55.333Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Services\\AuthService.cs",
+              "DocumentMoniker": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "frontend\\ClusterFrontend\\ClusterFrontend\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\Milan\\source\\gitHubRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Services\\AuthService.cs",
+              "ToolTip": "C:\\GitRepos\\cluster\\Cluster\\frontend\\ClusterFrontend\\ClusterFrontend\\Services\\AuthService.cs",
               "RelativeToolTip": "frontend\\ClusterFrontend\\ClusterFrontend\\Services\\AuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowDYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-13T16:00:06.388Z",
               "EditorCaption": ""

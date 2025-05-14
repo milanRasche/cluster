@@ -30,7 +30,7 @@ namespace ClusterFrontend.Services
                 string jsonContent = JsonSerializer.Serialize(request);
 
                 var response = await _httpClient.PostAsync(
-                    "http://gateway.api:8080/auth/UserAuth/register",
+                    $"{AuthApiURL}/register",
                     new StringContent(jsonContent, Encoding.UTF8, "application/json")
                 );
 
@@ -56,7 +56,7 @@ namespace ClusterFrontend.Services
                 string jsonContent = JsonSerializer.Serialize(request);
 
                 var response = await _httpClient.PostAsync(
-                    $"/login",
+                    $"{AuthApiURL}/login",
                     new StringContent(jsonContent, Encoding.UTF8, "application/json")
                 );
 
@@ -68,34 +68,6 @@ namespace ClusterFrontend.Services
                 {
                     var errorContent = await response.Content.ReadAsStringAsync();
                     throw new HttpRequestException($"Login failed with status {response.StatusCode}: {errorContent}");
-                }
-            }
-            catch (HttpRequestException ex)
-            {
-                Console.WriteLine($"API request failed: {ex.Message}");
-                return null;
-            }
-        }
-
-        public async Task<UserInfo?> RefreshToken(RefreshRequest refreshRequest)
-        {
-            try
-            {
-                string jsonContent = JsonSerializer.Serialize(refreshRequest);
-
-                var response = await _httpClient.PostAsync(
-                    $"/refresh-token",
-                    new StringContent(jsonContent, Encoding.UTF8, "application/json")
-                );
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadFromJsonAsync<UserInfo?>();
-                }
-                else
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    throw new HttpRequestException($"Token refresh failed with status {response.StatusCode}: {errorContent}");
                 }
             }
             catch (HttpRequestException ex)
