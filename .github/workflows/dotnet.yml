@@ -18,13 +18,13 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore Cluster/Cluster.sln
-      working-directory: ./cluster
+      run: dotnet restore Cluster.sln
+      working-directory: ./cluster/Cluster
       
     - name: Build
-      run: dotnet build --no-restore Cluster/Cluster.sln
-      working-directory: ./cluster
+      run: dotnet build --no-restore Cluster.sln
+      working-directory: ./cluster/Cluster
       
     - name: Test
-      run: dotnet test --no-build --verbosity normal Cluster/Cluster.sln
-      working-directory: ./cluster
+      run: dotnet test --no-build --verbosity normal Cluster.sln
+      working-directory: ./cluster/Cluster
