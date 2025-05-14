@@ -8,7 +8,7 @@ namespace Auth.API.Objects
     public class User
     {
         [Key]
-        public string UUID { get; set; } = Guid.NewGuid().ToString();
+        public Guid UUID { get; set; } = Guid.NewGuid();
 
         [Required]
         public string Username { get; set; } = string.Empty;
@@ -18,5 +18,7 @@ namespace Auth.API.Objects
 
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
+
+        public ICollection<RefreshToken> ?RefreshTokens { get; set; }
     }
 }

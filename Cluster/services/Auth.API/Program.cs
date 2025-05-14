@@ -27,6 +27,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IPasswordHasher, SHA256PasswordHasher>();
+builder.Services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
+builder.Services.AddScoped<IJWTTokenGenerator, JWTTokenGenerator>();
 
 var app = builder.Build();
 

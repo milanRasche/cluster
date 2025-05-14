@@ -2,6 +2,7 @@
 using Auth.API.DTOs;
 using Auth.API.Interfaces;
 using Auth.API.Objects;
+using Azure.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,15 @@ namespace Auth.API.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IJWTTokenGenerator _jwtGenerator;
+        private readonly IRefreshTokenGenerator _refreshGenerator;
 
-        public UserAuthController(ApplicationDbContext context, IPasswordHasher passwordHasher)
+        public UserAuthController(ApplicationDbContext context, IPasswordHasher passwordHasher, IJWTTokenGenerator jwtTokenGenerator, IRefreshTokenGenerator refreshTokenGenerator)
         {
             _context = context;
             _passwordHasher = passwordHasher;
+            _jwtGenerator = jwtTokenGenerator;
+            _refreshGenerator = refreshTokenGenerator;
         }
 
         [HttpPost("register")]
@@ -54,7 +59,26 @@ namespace Auth.API.Controllers
             if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.PasswordHash))
                 return Unauthorized("Invalid credentials.");
 
-            return Ok(new { user.UUID, user.Username, user.UserEmail });
-        }
+            var jwtToken = _jwtGenerator.GenerateToken(user);
+            
+            var refreshToken = new RefreshToken
+            {
+                Token = _refreshGenerator.GenerateToken(),
+                ExpiryDate = DateTime.UtcNow.AddDays(7),
+                UserUUID = user.UUID,
+                CreationDate = DateTime.UtcNow,
+                IsRevoked = false
+            };
+
+            user.RefreshTokens.Add(refreshToken);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                JWTToken = jwtToken,
+                RefreshToken = refreshToken.Token
+            });
+
+        }   
     }
 }
