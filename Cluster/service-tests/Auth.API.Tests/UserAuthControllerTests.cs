@@ -1,5 +1,7 @@
 ﻿using Auth.API.Controllers;
 using Auth.API.Data;
+using Auth.API.Logic;
+using Auth.API.Interfaces;
 using Auth.API.DTOs;
 using Auth.API.Objects;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +15,13 @@ namespace Auth.API.Tests
     {
         private readonly UserAuthController _controller;
         private readonly ApplicationDbContext _context;
+        private readonly IPasswordHasher _passwordHasher;
 
         public UserAuthControllerTests()
         {
             _context = TestDbContextFactory.Create();
-            _controller = new UserAuthController(_context);
+            _passwordHasher = new SHA256PasswordHasher();
+            _controller = new UserAuthController(_context, _passwordHasher);
         }
 
         [Fact]
@@ -26,7 +30,7 @@ namespace Auth.API.Tests
             // Arrange
             var request = new UserRegisterRequest
             {
-                UserName = "TestUser",
+                Username = "TestUser",
                 UserEmail = "test@example.com",
                 Password = "Password123"
             };
@@ -45,12 +49,12 @@ namespace Auth.API.Tests
         public async Task Register_ShouldReturnBadRequest_WhenEmailAlreadyExists()
         {
             // Arrange
-            _context.Users.Add(new User { UserName = "Existing", UserEmail = "exists@example.com", PasswordHash = "hash" });
+            _context.Users.Add(new User { Username = "Existing", UserEmail = "exists@example.com", PasswordHash = "hash" });
             await _context.SaveChangesAsync();
 
             var request = new UserRegisterRequest
             {
-                UserName = "NewUser",
+                Username = "NewUser",
                 UserEmail = "exists@example.com",
                 Password = "Password123"
             };
@@ -72,7 +76,7 @@ namespace Auth.API.Tests
             var password = "Password123";
             var hash = "";
 
-            _context.Users.Add(new User { UserName = "Validuser", UserEmail = email, PasswordHash = hash });
+            _context.Users.Add(new User { Username = "Validuser", UserEmail = email, PasswordHash = hash });
             await _context.SaveChangesAsync();
 
             var request = new UserLoginRequest
