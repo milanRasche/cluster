@@ -22,8 +22,7 @@ namespace Auth.API.Objects
         [Required]
         public Guid UserUUID { get; set; }
 
-        [Required]
         [ForeignKey(nameof(UserUUID))]
-        public User ?User { get; set; }
+        public User User { get; set; }
     }
 }
