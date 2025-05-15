@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Auth.API.Objects
 {
+    [Table("RefreshTokens")]
     public class RefreshToken
     {
         [Key]

@@ -29,6 +29,12 @@ namespace Auth.API.Data
             
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .ToTable("user");
+
+            modelBuilder.Entity<RefreshToken>()
+                .ToTable("RefreshTokens");
+
             modelBuilder.Entity<RefreshToken>()
                 .HasOne(rt => rt.User)
                 .WithMany(u => u.RefreshTokens)

@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Auth.API.Objects
 {
-    [Table("user", Schema = "dbo")]
+    [Table("user")]
     public class User
     {
         [Key]
@@ -19,6 +19,6 @@ namespace Auth.API.Objects
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
 
-        public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     }
 }
