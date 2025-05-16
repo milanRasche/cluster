@@ -28,3 +28,19 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal Cluster.sln
       working-directory: Cluster/
+
+    - name: Code Analysis
+      run: dotnet format --verify-no-changes --severity info
+      working-directory: Cluster/
+
+    - name: Static Code Analysis
+      run: dotnet build Cluster.sln -warnaserror -p:AnalysisMode=AllEnabled
+      working-directory: Cluster/
+
+    - name: Generate Code Metrics
+      run: dotnet build Cluster.sln -warnaserror -p:AnalysisMode=AllEnabled -p:RunCodeAnalysis=true
+      working-directory: Cluster/
+
+    - name: Security Scan (NuGet Vulnerabilities)
+      run: dotnet list Cluster.sln package --vulnerable
+      working-directory: Cluster/
