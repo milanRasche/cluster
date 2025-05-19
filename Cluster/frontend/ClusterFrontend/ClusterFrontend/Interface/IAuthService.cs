@@ -6,5 +6,6 @@ namespace ClusterFrontend.Interface
     {
         Task<bool> Register(UserRegisterRequest registerRequest);
         Task<AuthResponse?> Login(UserLoginRequest loginRequest);
+        Task Logout();
     }
 }

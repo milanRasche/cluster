@@ -141,5 +141,23 @@ namespace Auth.API.Controllers
                 });
             }
         }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout([FromBody] RefreshTokenRequest request)
+        {
+            if (string.IsNullOrEmpty(request.RefreshToken))
+                return BadRequest("Refresh token required.");
+
+            var refreshToken = await _context.RefreshTokens
+                .SingleOrDefaultAsync(r => r.Token == request.RefreshToken);
+
+            if (refreshToken == null)
+                return NotFound("Refresh token not found.");
+
+            refreshToken.IsRevoked = true;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Token Revoked" });
+        }
     }
 }

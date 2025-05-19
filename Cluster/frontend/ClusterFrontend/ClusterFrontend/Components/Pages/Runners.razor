@@ -1,0 +1,125 @@
+﻿@page "/runners"
+@using ClusterFrontend.Objects
+@rendermode InteractiveServer
+
+<h3>Runners</h3>
+
+<button @onclick="OpenAddRunnerPopup">+ Add Runner</button>
+
+@if (!string.IsNullOrEmpty(NewRunnerSecret))
+{
+    <div class="alert">
+        <p>Runner Secret: @NewRunnerSecret</p>
+    </div>
+}
+
+@if (TaskRunners.Count == 0)
+{
+    <p>No runners registered yet.</p>
+}
+else
+{
+    <ul>
+        @foreach (var runner in TaskRunners)
+        {
+            <li>
+                <span>@runner.Name (Last connected: @runner.LastConnected)</span>
+                <button @onclick="() => DeleteRunner(runner.Id)">🗑️</button>
+            </li>
+        }
+    </ul>
+}
+
+<!-- Runner Add/Edit Popup -->
+@if (ShowAddRunnerPopup) 
+{
+    <div class="popup-overlay" @onclick="CloseAddRunnerPopup">
+        <div class="popup">
+            <h4>Add Runner</h4>
+            <input type="text" placeholder="Enter runner name" @bind="NewRunnerName" />
+            <button @onclick="ConfirmAddRunner">Confirm</button>
+            <button @onclick="CloseAddRunnerPopup">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    private List<TaskRunner> TaskRunners = new()
+    {
+        new TaskRunner { Id = Guid.NewGuid(), Name = "Runner 1", LastConnected = DateTime.Now.AddDays(-2) },
+        new TaskRunner { Id = Guid.NewGuid(), Name = "Runner 2", LastConnected = DateTime.Now.AddHours(-5) }
+    };
+    private string NewRunnerSecret = string.Empty;
+    private bool ShowAddRunnerPopup = false;
+    private string NewRunnerName = string.Empty;
+
+    private void OpenAddRunnerPopup()
+    {
+        ShowAddRunnerPopup = true;
+    }
+
+    private void CloseAddRunnerPopup()
+    {
+        ShowAddRunnerPopup = false;
+        NewRunnerName = string.Empty;
+    }
+
+    private void ConfirmAddRunner()
+    {
+        if (!string.IsNullOrWhiteSpace(NewRunnerName))
+        {
+            var newRunner = new TaskRunner
+                {
+                    Id = Guid.NewGuid(),
+                    Name = NewRunnerName,
+                    LastConnected = DateTime.Now
+                };
+            TaskRunners.Add(newRunner);
+            NewRunnerSecret = Guid.NewGuid().ToString();
+            CloseAddRunnerPopup();
+        }
+    }
+
+    private void DeleteRunner(Guid runnerId)
+    {
+        TaskRunners.RemoveAll(r => r.Id.Equals(runnerId));
+    }
+}
+
+<style>
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        width: 300px;
+    }
+
+        .popup input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .popup button {
+            margin-right: 5px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+</style>

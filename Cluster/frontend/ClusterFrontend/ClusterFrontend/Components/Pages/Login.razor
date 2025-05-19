@@ -1,10 +1,10 @@
 ﻿@page "/login"
 @using ClusterFrontend.Services
 @using ClusterFrontend.Interface
+@using ClusterFrontend.DTOs
 @inject NavigationManager NavigationManager
-@inject IHttpContextAccessor HttpContextAccessor
 @inject IAuthService AuthService
-@inject ICookieService CookieService
+@inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
 
 <EditForm Model="@loginModel" OnValidSubmit="@HandleLogin" FormName="Login">
@@ -32,15 +32,9 @@
         </div>
     }
 </EditForm>
-
 @code {
-    private UserLoginRequest loginModel;
+    private UserLoginRequest loginModel = new();
     private string? ErrorMessage { get; set; }
-
-    protected override void OnInitialized()
-    {
-        loginModel = new UserLoginRequest();
-    }
 
     private async Task HandleLogin()
     {
@@ -49,6 +43,7 @@
             var tokens = await AuthService.Login(loginModel);
             if (tokens != null)
             {
+                // Cookie setting is now handled inside AuthService via JS Interop
                 NavigationManager.NavigateTo("/");
             }
             else

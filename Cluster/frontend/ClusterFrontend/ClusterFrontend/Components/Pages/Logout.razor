@@ -1,0 +1,45 @@
+﻿@page "/logout"
+@using ClusterFrontend.Interface
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+
+
+<h3>Logging out...</h3>
+
+@code {
+    private bool _firstRender = true;
+
+    // Don't try to call JS during initial render/initialization
+    protected override void OnInitialized()
+    {
+        // Just do initialization if needed, but don't call JS functions
+    }
+
+    // Instead, wait for the component to be rendered on the client
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRender = false;
+
+            try
+            {
+                Console.WriteLine("Starting logout process after render");
+                await AuthService.Logout();
+                Console.WriteLine("Logout completed successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error during logout: {ex.Message}");
+                // Even if there's an error, we still want to redirect
+            }
+            finally
+            {
+                // Force reload to ensure all UI elements update correctly
+                NavigationManager.NavigateTo("/", true);
+            }
+        }
+    }
+}

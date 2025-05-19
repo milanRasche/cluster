@@ -2,19 +2,24 @@
 using System.Text.Json;
 using System.Text;
 using ClusterFrontend.Interface;
+using Microsoft.JSInterop;
 
 namespace ClusterFrontend.Services
 {
     public class AuthService : IAuthService
     {
         private readonly HttpClient _httpClient;
+        private readonly IJSRuntime _jsRuntime;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private const string AuthApiURL = "http://gateway.api:8080/auth/UserAuth";
 
-        public AuthService(IHttpClientFactory httpClientFactory)
+        public AuthService(IHttpClientFactory httpClientFactory, IJSRuntime jsRuntime, IHttpContextAccessor httpContextAccessor)
         {
             _httpClient = httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri(AuthApiURL);
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
+            _jsRuntime = jsRuntime;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<bool> Register(UserRegisterRequest request)
         {
@@ -47,15 +52,21 @@ namespace ClusterFrontend.Services
             try
             {
                 string jsonContent = JsonSerializer.Serialize(request);
-
                 var response = await _httpClient.PostAsync(
                     $"{AuthApiURL}/login",
                     new StringContent(jsonContent, Encoding.UTF8, "application/json")
                 );
-
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<AuthResponse?>();
+                    var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse?>();
+
+                    // Set cookies using JavaScript Interop
+                    if (authResponse != null)
+                    {
+                        await SetCookiesViaJsInterop(authResponse);
+                    }
+
+                    return authResponse;
                 }
                 else
                 {
@@ -67,6 +78,108 @@ namespace ClusterFrontend.Services
             {
                 Console.WriteLine($"API request failed: {ex.Message}");
                 return null;
+            }
+        }
+
+        public async Task Logout()
+        {
+            try
+            {
+                string refreshToken = null;
+                try
+                {
+                    refreshToken = await _jsRuntime.InvokeAsync<string>("cookieHelpers.getCookie", "RefreshToken");
+                }
+                catch (InvalidOperationException ex) when (ex.Message.Contains("JavaScript interop calls cannot be issued at this time"))
+                {
+                    _httpContextAccessor.HttpContext?.Request.Cookies.TryGetValue("RefreshToken", out refreshToken);
+                }
+
+                if (!string.IsNullOrEmpty(refreshToken))
+                {
+                    var content = new StringContent(
+                        JsonSerializer.Serialize(new { RefreshToken = refreshToken }),
+                        Encoding.UTF8,
+                        "application/json"
+                    );
+
+                    // Call the correct logout endpoint
+                    var response = await _httpClient.PostAsync(
+                        $"{AuthApiURL}/logout",
+                        content);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine($"Logout API call failed: {response.StatusCode}");
+                    }
+                }
+
+                try
+                {
+                    await _jsRuntime.InvokeVoidAsync("cookieHelpers.removeCookie", "JWTToken");
+                    await _jsRuntime.InvokeVoidAsync("cookieHelpers.removeCookie", "RefreshToken");
+                }
+                catch (InvalidOperationException ex) when (ex.Message.Contains("JavaScript interop calls cannot be issued at this time"))
+                {
+                    if (_httpContextAccessor.HttpContext != null)
+                    {
+                        _httpContextAccessor.HttpContext.Response.Cookies.Delete("JWTToken");
+                        _httpContextAccessor.HttpContext.Response.Cookies.Delete("RefreshToken");
+                    }
+                }
+
+                Console.WriteLine("Logout successful: tokens revoked and cookies deleted.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error during logout: {ex.Message}");
+
+                try
+                {
+                    await _jsRuntime.InvokeVoidAsync("cookieHelpers.removeCookie", "JWTToken");
+                    await _jsRuntime.InvokeVoidAsync("cookieHelpers.removeCookie", "RefreshToken");
+                }
+                catch
+                {
+                    if (_httpContextAccessor.HttpContext != null)
+                    {
+                        _httpContextAccessor.HttpContext.Response.Cookies.Delete("JWTToken");
+                        _httpContextAccessor.HttpContext.Response.Cookies.Delete("RefreshToken");
+                    }
+                }
+
+                throw; // Re-throw the exception
+            }
+        
+        }
+
+        private async Task SetCookiesViaJsInterop(AuthResponse authResponse)
+        {
+            try
+            {
+                // Using the cookieHelper.js functions
+                await _jsRuntime.InvokeVoidAsync(
+                    "cookieHelpers.setCookie",
+                    "JWTToken",
+                    authResponse.JWTToken,
+                    7, // days valid
+                    "Strict" // SameSite attribute
+                );
+
+                await _jsRuntime.InvokeVoidAsync(
+                    "cookieHelpers.setCookie",
+                    "RefreshToken",
+                    authResponse.RefreshToken,
+                    30, // days valid
+                    "Strict" // SameSite attribute
+                );
+
+                Console.WriteLine("Cookies set successfully via JS Interop");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error setting cookies via JS Interop: {ex.Message}");
+                throw;
             }
         }
     }
