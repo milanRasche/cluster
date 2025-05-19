@@ -41,8 +41,7 @@ namespace Auth.API.Logic
                 iterationCount: Iterations,
                 numBytesRequested: HashSize
             );
-
-                return CryptographicOperations.FixedTimeEquals(computedHash, storedHash);
+            return CryptographicOperations.FixedTimeEquals(computedHash, storedHash);
         }
     }
 }

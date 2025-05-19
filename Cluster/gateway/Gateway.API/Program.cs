@@ -27,7 +27,7 @@ builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 
 app.UseRouting();
-app.UseHttpLogging(); 
+app.UseHttpLogging();
 app.UseCors(AllowedOrigins);
 app.MapReverseProxy();
 
