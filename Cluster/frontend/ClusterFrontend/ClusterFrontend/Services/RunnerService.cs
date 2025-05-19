@@ -5,18 +5,15 @@ using System.Runtime.CompilerServices;
 
 namespace ClusterFrontend.Services
 {
-    
-    public class RunnerService : IRunnerService
+    public class RunnRunnerService(
+        IHttpClientFactory httpClientFactory
+        ) : IRunnerService
     {
-        private readonly HttpClient _httpClient;
-
-        public RunnerService(IHttpClientFactory httpClientFactory)
-        {
-            _httpClient = httpClientFactory.CreateClient();
-        }
+        private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
 
         public Task<TaskRunner> RequestNewRunner(RequestRunner runner)
         {
+            var abc = _httpClient;
             return null;
         }
 

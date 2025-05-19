@@ -150,7 +150,6 @@ namespace ClusterFrontend.Services
 
                 throw; // Re-throw the exception
             }
-        
         }
 
         private async Task SetCookiesViaJsInterop(AuthResponse authResponse)
