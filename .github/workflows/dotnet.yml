@@ -42,5 +42,5 @@ jobs:
       working-directory: Cluster/
 
     - name: Security Scan (NuGet Vulnerabilities)
-      run: dotnet list package --vulnerable Cluster.sln
+      run: dotnet list Cluster.sln package --vulnerable
       working-directory: Cluster/
