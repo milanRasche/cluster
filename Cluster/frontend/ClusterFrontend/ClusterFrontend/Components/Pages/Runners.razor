@@ -4,31 +4,51 @@
 
 <h3>Runners</h3>
 
-<button @onclick="OpenAddRunnerPopup">+ Add Runner</button>
-
-@if (!string.IsNullOrEmpty(NewRunnerSecret))
-{
-    <div class="alert">
-        <p>Runner Secret: @NewRunnerSecret</p>
-    </div>
-}
-
-@if (TaskRunners.Count == 0)
-{
-    <p>No runners registered yet.</p>
-}
-else
-{
-    <ul>
-        @foreach (var runner in TaskRunners)
+<div class="container">
+    <div class="column left">
+        <h2>Left Column</h2>
+        @if (TaskRunners.Count == 0)
         {
-            <li>
-                <span>@runner.Name (Last connected: @runner.LastConnected)</span>
-                <button @onclick="() => DeleteRunner(runner.Id)">🗑️</button>
-            </li>
+            <p>No runners registered yet.</p>
         }
-    </ul>
-}
+        else
+        {
+            <ul>
+                @foreach (var runner in TaskRunners)
+                {
+                    <li>
+                        <span>@runner.Name (Last connected: @runner.LastConnected)</span>
+                        <button @onclick="() => DeleteRunner(runner.Id)">🗑️</button>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+    <div class="column right">
+        <h2>Right Column</h2>
+        <EditForm Model="@runnerRequest" OnValidSubmit="@HandleRegisterRunner" FormName="Register">
+            <div>
+                <h3 style="font-weight:bold; color:purple">Request New Runner</h3>
+            </div>
+            <br />
+            <div class="col-12 row">
+                <input class="form-control col-12" @bind="" placeholder="Name" />
+            </div>
+            <br />
+            <br />
+            <div class="col-12 row">
+                <input type="submit" class="form-control col-6 btn btn-primary" value="Request Secret" 
+            </div>
+            <br />
+            @if (ErrorMessage != null)
+            {
+                <div class="col-12 row" style="text-align:left; font-weight:bold">
+                    <span class="col-12">@ErrorMessage</span>
+                </div>
+            }
+        </EditForm>
+    </div>
+</div>
 
 <!-- Runner Add/Edit Popup -->
 @if (ShowAddRunnerPopup) 
@@ -44,6 +64,8 @@ else
 }
 
 @code {
+    private RequestRunner runnerRequest = new();
+
     private List<TaskRunner> TaskRunners = new()
     {
         new TaskRunner { Id = Guid.NewGuid(), Name = "Runner 1", LastConnected = DateTime.Now.AddDays(-2) },
@@ -84,42 +106,32 @@ else
     {
         TaskRunners.RemoveAll(r => r.Id.Equals(runnerId));
     }
+
+    private Task HandleRegisterRunner()
+    {
+        
+    }
 }
 
 <style>
-    .popup-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+    .container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
+        gap: 20px;
     }
 
-    .popup {
-        background-color: #fff;
+    .column {
+        flex: 1;
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        width: 300px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-        .popup input {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+    .left {
+        background-color: #e7f0ff;
+    }
 
-        .popup button {
-            margin-right: 5px;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .right {
+        background-color: #ffe7e7;
+    }
 </style>
