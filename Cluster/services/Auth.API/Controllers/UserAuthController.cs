@@ -2,14 +2,8 @@
 using Auth.API.DTOs;
 using Auth.API.Interfaces;
 using Auth.API.Objects;
-using Azure.Core;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Newtonsoft.Json.Linq;
-using System.Security.Cryptography;
 
 namespace Auth.API.Controllers
 {
@@ -25,8 +19,6 @@ namespace Auth.API.Controllers
         private readonly IPasswordHasher _passwordHasher = passwordHasher;
         private readonly IJWTTokenGenerator _jwtGenerator = jwtGenerator;
         private readonly IRefreshTokenGenerator _refreshGenerator = refreshGenerator;
-        
-
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)

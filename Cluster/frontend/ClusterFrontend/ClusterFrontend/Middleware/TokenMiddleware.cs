@@ -8,7 +8,7 @@ namespace ClusterFrontend.Middleware
         RequestDelegate next)
     {
         private readonly RequestDelegate _next = next;
-        
+
         public async Task InvokeAsync(HttpContext context, IAuthService authService, ICookieService cookieService)
         {
             if (context.Request.Path == "/auth/UserAuth/login" && context.Request.Method == "POST")
