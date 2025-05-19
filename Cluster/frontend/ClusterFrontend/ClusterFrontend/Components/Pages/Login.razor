@@ -2,7 +2,9 @@
 @using ClusterFrontend.Services
 @using ClusterFrontend.Interface
 @inject NavigationManager NavigationManager
+@inject IHttpContextAccessor HttpContextAccessor
 @inject IAuthService AuthService
+@inject ICookieService CookieService
 @rendermode InteractiveServer
 
 <EditForm Model="@loginModel" OnValidSubmit="@HandleLogin" FormName="Login">
@@ -44,9 +46,8 @@
     {
         try
         {
-            var userInfo = await AuthService.Login(loginModel);
-
-            if (userInfo != null)
+            var tokens = await AuthService.Login(loginModel);
+            if (tokens != null)
             {
                 NavigationManager.NavigateTo("/");
             }

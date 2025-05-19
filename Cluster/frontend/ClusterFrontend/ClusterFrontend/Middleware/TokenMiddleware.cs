@@ -1,0 +1,61 @@
+﻿using ClusterFrontend.DTOs;
+using ClusterFrontend.Interface;
+using System.Text.Json;
+
+namespace ClusterFrontend.Middleware
+{
+    public class TokenMiddleware
+    {
+        private readonly RequestDelegate _next;
+        private readonly ILogger<TokenMiddleware> _logger;
+
+        public TokenMiddleware(RequestDelegate next, ILogger<TokenMiddleware> logger)
+        {
+            _next = next;
+            _logger = logger;
+        }
+
+        public async Task InvokeAsync(HttpContext context, IAuthService authService, ICookieService cookieService)
+        {
+            if (context.Request.Path == "/auth/UserAuth/login" && context.Request.Method == "POST")
+            {
+                context.Request.EnableBuffering();
+
+                try
+                {
+                    using var reader = new StreamReader(context.Request.Body, leaveOpen: true);
+                    var body = await reader.ReadToEndAsync();
+                    context.Request.Body.Position = 0;
+
+                    var loginRequest = JsonSerializer.Deserialize<UserLoginRequest>(body);
+                    if (loginRequest != null)
+                    {
+                        var tokens = await authService.Login(loginRequest);
+                        if (tokens != null)
+                        {
+                            // Set the tokens in cookies
+                            cookieService.SetJwtToken(context, tokens.JWTToken);
+                            cookieService.SetRefreshToken(context, tokens.RefreshToken);
+                            _logger.LogInformation("Tokens set successfully for user: {Email}", loginRequest.UserEmail);
+                        }
+                        else
+                        {
+                            context.Response.StatusCode = 401;
+                            await context.Response.WriteAsync("Invalid email or password");
+                            return;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error during login");
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync($"An error occurred: {ex.Message}");
+                    return;
+                }
+            }
+
+            await _next(context);
+        }
+    }
+}

@@ -1,5 +1,6 @@
 using ClusterFrontend.Components;
 using ClusterFrontend.Interface;
+using ClusterFrontend.Middleware;
 using ClusterFrontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICookieService, CookieService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
@@ -32,7 +34,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+app.UseRouting();
 app.UseAntiforgery();
+
+
+app.UseMiddleware<TokenMiddleware>();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

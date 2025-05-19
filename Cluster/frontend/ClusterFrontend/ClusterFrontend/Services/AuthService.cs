@@ -49,7 +49,7 @@ namespace ClusterFrontend.Services
             }
         }
 
-        public async Task<UserInfo?> Login(UserLoginRequest request)
+        public async Task<AuthResponse?> Login(UserLoginRequest request)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace ClusterFrontend.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<UserInfo?>();
+                    return await response.Content.ReadFromJsonAsync<AuthResponse?>();
                 }
                 else
                 {
