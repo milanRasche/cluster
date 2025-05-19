@@ -15,20 +15,18 @@ namespace Auth.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class UserAuthController : ControllerBase
+    public class UserAuthController(
+        ApplicationDbContext context,
+        IPasswordHasher passwordHasher,
+        IJWTTokenGenerator jwtGenerator,
+        IRefreshTokenGenerator refreshGenerator) : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IPasswordHasher _passwordHasher;
-        private readonly IJWTTokenGenerator _jwtGenerator;
-        private readonly IRefreshTokenGenerator _refreshGenerator;
+        private readonly ApplicationDbContext _context = context;
+        private readonly IPasswordHasher _passwordHasher = passwordHasher;
+        private readonly IJWTTokenGenerator _jwtGenerator = jwtGenerator;
+        private readonly IRefreshTokenGenerator _refreshGenerator = refreshGenerator;
+        
 
-        public UserAuthController(ApplicationDbContext context, IPasswordHasher passwordHasher, IJWTTokenGenerator jwtTokenGenerator, IRefreshTokenGenerator refreshTokenGenerator)
-        {
-            _context = context;
-            _passwordHasher = passwordHasher;
-            _jwtGenerator = jwtTokenGenerator;
-            _refreshGenerator = refreshTokenGenerator;
-        }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)

@@ -4,17 +4,11 @@ using System.Text.Json;
 
 namespace ClusterFrontend.Middleware
 {
-    public class TokenMiddleware
+    public class TokenMiddleware(
+        RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<TokenMiddleware> _logger;
-
-        public TokenMiddleware(RequestDelegate next, ILogger<TokenMiddleware> logger)
-        {
-            _next = next;
-            _logger = logger;
-        }
-
+        private readonly RequestDelegate _next = next;
+        
         public async Task InvokeAsync(HttpContext context, IAuthService authService, ICookieService cookieService)
         {
             if (context.Request.Path == "/auth/UserAuth/login" && context.Request.Method == "POST")
@@ -33,11 +27,8 @@ namespace ClusterFrontend.Middleware
                         var tokens = await authService.Login(loginRequest);
                         if (tokens != null)
                         {
-                            // Set the tokens in cookies
                             cookieService.SetJwtToken(context, tokens.JWTToken);
-                            cookieService.SetRefreshToken(context, tokens.RefreshToken);
-                            _logger.LogInformation("Tokens set successfully for user: {Email}", loginRequest.UserEmail);
-                        }
+                            cookieService.SetRefreshToken(context, tokens.RefreshToken);                        }
                         else
                         {
                             context.Response.StatusCode = 401;
@@ -48,7 +39,6 @@ namespace ClusterFrontend.Middleware
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error during login");
                     context.Response.StatusCode = 500;
                     await context.Response.WriteAsync($"An error occurred: {ex.Message}");
                     return;

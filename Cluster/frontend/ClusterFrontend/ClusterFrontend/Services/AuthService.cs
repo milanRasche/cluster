@@ -1,13 +1,7 @@
 ﻿using ClusterFrontend.DTOs;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text;
 using ClusterFrontend.Interface;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using System;
-using Microsoft.AspNetCore.Identity.Data;
 
 namespace ClusterFrontend.Services
 {
@@ -16,13 +10,12 @@ namespace ClusterFrontend.Services
         private readonly HttpClient _httpClient;
         private const string AuthApiURL = "http://gateway.api:8080/auth/UserAuth";
 
-        public AuthService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public AuthService(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri(AuthApiURL);
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
         }
-        
         public async Task<bool> Register(UserRegisterRequest request)
         {
             try

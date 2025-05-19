@@ -7,14 +7,9 @@ using System.Text;
 
 namespace Auth.API.Logic
 {
-    public class JWTTokenGenerator : IJWTTokenGenerator
+    public class JWTTokenGenerator(IConfiguration configuration) : IJWTTokenGenerator
     {
-        private readonly IConfiguration _configuration;
-
-        public JWTTokenGenerator(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        private readonly IConfiguration _configuration = configuration;
 
         public string GenerateToken(User user)
         {
@@ -22,13 +17,13 @@ namespace Auth.API.Logic
             var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
+                Subject = new ClaimsIdentity(
+                [
                     new Claim(JwtRegisteredClaimNames.Sub, user.UUID.ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.UserEmail),
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.NameIdentifier, user.UUID.ToString())
-                }),
+                ]),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

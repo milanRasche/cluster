@@ -7,15 +7,21 @@ namespace Auth.API.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             try
             {
-                var databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-                if (databaseCreator != null)
+                if (Database.GetService<IDatabaseCreator>() is RelationalDatabaseCreator databaseCreator)
                 {
-                    if (!databaseCreator.CanConnect()) databaseCreator.Create();
-                    if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
+                    if (!databaseCreator.CanConnect())
+                    {
+                        databaseCreator.Create();
+                    }
+
+                    if (!databaseCreator.HasTables())
+                    {
+                        databaseCreator.CreateTables();
+                    }
                 }
             }
             catch (Exception ex)
@@ -26,12 +32,11 @@ namespace Auth.API.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-            
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
                 .ToTable("user");
-
             modelBuilder.Entity<RefreshToken>()
                 .ToTable("RefreshTokens");
 
