@@ -9,11 +9,10 @@ namespace ClusterFrontend.Services
         IHttpClientFactory httpClientFactory
         ) : IRunnerService
     {
-        private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
+        //private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
 
         public Task<TaskRunner> RequestNewRunner(RequestRunner runner)
         {
-            var abc = _httpClient;
             return null;
         }
 
