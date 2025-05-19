@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="column left">
-        <h2>Left Column</h2>
+        <h3>Runners</h3>
         @if (TaskRunners.Count == 0)
         {
             <p>No runners registered yet.</p>
@@ -25,43 +25,22 @@
         }
     </div>
     <div class="column right">
-        <h2>Right Column</h2>
         <EditForm Model="@runnerRequest" OnValidSubmit="@HandleRegisterRunner" FormName="Register">
             <div>
                 <h3 style="font-weight:bold; color:purple">Request New Runner</h3>
             </div>
             <br />
             <div class="col-12 row">
-                <input class="form-control col-12" @bind="" placeholder="Name" />
+                <input class="form-control col-12" @bind="runnerRequest.Name" placeholder="Name" />
             </div>
             <br />
             <br />
             <div class="col-12 row">
-                <input type="submit" class="form-control col-6 btn btn-primary" value="Request Secret" 
+                <input type="submit" class="form-control col-6 btn btn-primary" value="Request Secret" />
             </div>
-            <br />
-            @if (ErrorMessage != null)
-            {
-                <div class="col-12 row" style="text-align:left; font-weight:bold">
-                    <span class="col-12">@ErrorMessage</span>
-                </div>
-            }
         </EditForm>
     </div>
 </div>
-
-<!-- Runner Add/Edit Popup -->
-@if (ShowAddRunnerPopup) 
-{
-    <div class="popup-overlay" @onclick="CloseAddRunnerPopup">
-        <div class="popup">
-            <h4>Add Runner</h4>
-            <input type="text" placeholder="Enter runner name" @bind="NewRunnerName" />
-            <button @onclick="ConfirmAddRunner">Confirm</button>
-            <button @onclick="CloseAddRunnerPopup">Cancel</button>
-        </div>
-    </div>
-}
 
 @code {
     private RequestRunner runnerRequest = new();
@@ -71,36 +50,6 @@
         new TaskRunner { Id = Guid.NewGuid(), Name = "Runner 1", LastConnected = DateTime.Now.AddDays(-2) },
         new TaskRunner { Id = Guid.NewGuid(), Name = "Runner 2", LastConnected = DateTime.Now.AddHours(-5) }
     };
-    private string NewRunnerSecret = string.Empty;
-    private bool ShowAddRunnerPopup = false;
-    private string NewRunnerName = string.Empty;
-
-    private void OpenAddRunnerPopup()
-    {
-        ShowAddRunnerPopup = true;
-    }
-
-    private void CloseAddRunnerPopup()
-    {
-        ShowAddRunnerPopup = false;
-        NewRunnerName = string.Empty;
-    }
-
-    private void ConfirmAddRunner()
-    {
-        if (!string.IsNullOrWhiteSpace(NewRunnerName))
-        {
-            var newRunner = new TaskRunner
-                {
-                    Id = Guid.NewGuid(),
-                    Name = NewRunnerName,
-                    LastConnected = DateTime.Now
-                };
-            TaskRunners.Add(newRunner);
-            NewRunnerSecret = Guid.NewGuid().ToString();
-            CloseAddRunnerPopup();
-        }
-    }
 
     private void DeleteRunner(Guid runnerId)
     {
@@ -109,7 +58,7 @@
 
     private Task HandleRegisterRunner()
     {
-        
+        return null;
     }
 }
 
