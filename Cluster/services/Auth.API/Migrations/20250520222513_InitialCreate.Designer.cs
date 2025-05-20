@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Auth.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250520115054_AddTaskRunners")]
-    partial class AddTaskRunners
+    [Migration("20250520222513_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,7 +111,7 @@ namespace Auth.API.Migrations
 
                     b.HasKey("UUID");
 
-                    b.ToTable("user", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Auth.API.Objects.RefreshToken", b =>

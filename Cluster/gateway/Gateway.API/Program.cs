@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
-var AllowedOrigins = "_allowedOrigins";
 
 builder.Services.AddHttpLogging(options =>
 {
@@ -26,9 +25,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+
 app.UseRouting();
 app.UseHttpLogging();
-app.UseCors(AllowedOrigins);
+app.UseCors();
 app.MapReverseProxy();
 
 

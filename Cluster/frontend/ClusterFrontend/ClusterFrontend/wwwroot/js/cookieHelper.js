@@ -1,4 +1,4 @@
-﻿function setCookie(name, value, days = 7, sameSite = 'Strict') {
+﻿function setCookie(name, value, days = 7, sameSite = 'None') {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     const expires = `expires=${date.toUTCString()}`;

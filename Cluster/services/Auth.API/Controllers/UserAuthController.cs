@@ -23,6 +23,10 @@ namespace Auth.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
         {
+            try
+            {
+
+           
             if (await _context.Users.AnyAsync(u => u.UserEmail == request.UserEmail))
             {
                 return BadRequest("User already exists.");
@@ -41,6 +45,11 @@ namespace Auth.API.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { user.UUID, user.UserEmail });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPost("login")]

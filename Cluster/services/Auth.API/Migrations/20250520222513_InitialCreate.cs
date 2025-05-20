@@ -11,12 +11,8 @@ namespace Auth.API.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "dbo");
-
             migrationBuilder.CreateTable(
-                name: "user",
-                schema: "dbo",
+                name: "Users",
                 columns: table => new
                 {
                     UUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -26,7 +22,7 @@ namespace Auth.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user", x => x.UUID);
+                    table.PrimaryKey("PK_Users", x => x.UUID);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,10 +40,33 @@ namespace Auth.API.Migrations
                 {
                     table.PrimaryKey("PK_RefreshTokens", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RefreshTokens_user_UserUUID",
+                        name: "FK_RefreshTokens_Users_UserUUID",
                         column: x => x.UserUUID,
-                        principalSchema: "dbo",
-                        principalTable: "user",
+                        principalTable: "Users",
+                        principalColumn: "UUID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TaskRunners",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecretHash = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastConnected = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    UserUUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskRunners", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TaskRunners_Users_UserUUID",
+                        column: x => x.UserUUID,
+                        principalTable: "Users",
                         principalColumn: "UUID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -55,6 +74,11 @@ namespace Auth.API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_UserUUID",
                 table: "RefreshTokens",
+                column: "UserUUID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskRunners_UserUUID",
+                table: "TaskRunners",
                 column: "UserUUID");
         }
 
@@ -65,8 +89,10 @@ namespace Auth.API.Migrations
                 name: "RefreshTokens");
 
             migrationBuilder.DropTable(
-                name: "user",
-                schema: "dbo");
+                name: "TaskRunners");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

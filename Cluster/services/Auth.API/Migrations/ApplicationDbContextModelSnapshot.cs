@@ -108,7 +108,7 @@ namespace Auth.API.Migrations
 
                     b.HasKey("UUID");
 
-                    b.ToTable("user", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Auth.API.Objects.RefreshToken", b =>
