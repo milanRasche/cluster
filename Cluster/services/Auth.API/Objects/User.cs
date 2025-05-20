@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Auth.API.Objects
 {
-    [Table("user")]
+    [Table("Users")]
     public class User
     {
         [Key]

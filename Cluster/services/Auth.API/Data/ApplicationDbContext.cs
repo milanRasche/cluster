@@ -9,25 +9,6 @@ namespace Auth.API.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            try
-            {
-                if (Database.GetService<IDatabaseCreator>() is RelationalDatabaseCreator databaseCreator)
-                {
-                    if (!databaseCreator.CanConnect())
-                    {
-                        databaseCreator.Create();
-                    }
-
-                    if (!databaseCreator.HasTables())
-                    {
-                        databaseCreator.CreateTables();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
 
         public DbSet<User> Users { get; set; }
@@ -37,7 +18,8 @@ namespace Auth.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .ToTable("user");
+                .ToTable("Users");
+
             modelBuilder.Entity<RefreshToken>()
                 .ToTable("RefreshTokens");
 
@@ -45,6 +27,12 @@ namespace Auth.API.Data
                 .HasOne(rt => rt.User)
                 .WithMany(u => u.RefreshTokens)
                 .HasForeignKey(rt => rt.UserUUID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TaskRunner>()
+                .HasOne(tr => tr.User)
+                .WithMany(u => u.TaskRunners)
+                .HasForeignKey(tr => tr.UserUUID)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
