@@ -1,5 +1,6 @@
 using ClusterFrontend.Components;
 using ClusterFrontend.Interface;
+using ClusterFrontend.Middleware;
 using ClusterFrontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,9 +9,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient();
+// HttpContextAccessor must be registered before handlers that depend on it
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+// Register JWTAuthorisationHandler after HttpContextAccessor
+builder.Services.AddTransient<JWTAuthorisationHandler>();
+
+// Register the HttpClient with the handler
+builder.Services.AddHttpClient("AuthorizedClient", client =>
+{
+    client.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
+})
+.AddHttpMessageHandler<JWTAuthorisationHandler>();
+
+// Register other services
+builder.Services.AddScoped<IRunnerService, RunnerService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
@@ -23,7 +37,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

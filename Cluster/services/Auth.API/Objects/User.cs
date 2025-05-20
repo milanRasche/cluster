@@ -20,5 +20,6 @@ namespace Auth.API.Objects
         public string PasswordHash { get; set; } = string.Empty;
 
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = [];
+        public virtual ICollection<TaskRunner> TaskRunners { get; set; } = [];
     }
 }

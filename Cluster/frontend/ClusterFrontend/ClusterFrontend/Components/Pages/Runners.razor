@@ -1,6 +1,10 @@
 ﻿@page "/runners"
+@using ClusterFrontend.Interface
 @using ClusterFrontend.Objects
+@inject IRunnerService RunnerService
+@inject IJSRuntime JSRuntime
 @rendermode InteractiveServer
+
 
 <h3>Runners</h3>
 
@@ -25,6 +29,17 @@
         }
     </div>
     <div class="column right">
+        @if (!string.IsNullOrEmpty(requestError))
+        {
+            <p style="color:red">@requestError</p>
+        }
+        @if (!string.IsNullOrEmpty(registrationSecret))
+        {
+            <p style="color:green">
+                Runner Registerd! Copy this secret: <strong>@registrationSecret</strong>
+            </p>
+            <sub>This secret is only onetime viewable for security reasons.</sub>
+        }
         <EditForm Model="@runnerRequest" OnValidSubmit="@HandleRegisterRunner" FormName="Register">
             <div>
                 <h3 style="font-weight:bold; color:purple">Request New Runner</h3>
@@ -44,21 +59,57 @@
 
 @code {
     private RequestRunner runnerRequest = new();
+    private List<TaskRunner> TaskRunners = new();
+    private string? requestError;
+    private string? registrationSecret;
 
-    private List<TaskRunner> TaskRunners = new()
+    protected override async Task OnInitializedAsync()
     {
-        new TaskRunner { Id = Guid.NewGuid(), Name = "Runner 1", LastConnected = DateTime.Now.AddDays(-2) },
-        new TaskRunner { Id = Guid.NewGuid(), Name = "Runner 2", LastConnected = DateTime.Now.AddHours(-5) }
-    };
-
-    private void DeleteRunner(Guid runnerId)
-    {
-        TaskRunners.RemoveAll(r => r.Id.Equals(runnerId));
+        await LoadRunners();
     }
 
-    private Task HandleRegisterRunner()
+    private async Task LoadRunners()
     {
-        return null;
+        try
+        {
+            TaskRunners = await RunnerService.GetRunners();
+        }
+        catch (Exception ex)
+        {
+            requestError = $"Failed to load runners: {ex.Message}";
+        }
+    }
+
+    private async Task HandleRegisterRunner()
+    {
+        registrationSecret = null;
+        requestError = null;
+
+        try
+        {
+            var newRunner = await RunnerService.RequestNewRunner(runnerRequest);
+
+            if (newRunner != null)
+            {
+                TaskRunners.Add(newRunner);
+                registrationSecret = newRunner.Secret; // Display raw secret
+                runnerRequest = new(); // Reset form
+            }
+            else
+            {
+                requestError = "Runner registration failed.";
+            }
+        }
+        catch (Exception ex)
+        {
+            requestError = $"Error registering runner: {ex.Message}";
+        }
+    }
+
+    private async Task DeleteRunner(Guid runnerId)
+    {
+        // You can later implement an API call here
+        TaskRunners.RemoveAll(r => r.Id == runnerId);
     }
 }
 

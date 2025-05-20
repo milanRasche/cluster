@@ -60,10 +60,11 @@ namespace ClusterFrontend.Services
                 {
                     var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse?>();
 
-                    // Set cookies using JavaScript Interop
                     if (authResponse != null)
                     {
                         await SetCookiesViaJsInterop(authResponse);
+
+                        return authResponse;
                     }
 
                     return authResponse;
