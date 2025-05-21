@@ -1,86 +1,110 @@
 services:
-
   gateway.api:
-    image: ${DOCKER_REGISTRY-}gatewayapi
     build:
       context: .
       dockerfile: gateway/Gateway.API/Dockerfile
     ports:
-        - 8080:8080
-    depends_on: 
-    - users.api
-    - tasks.api
-    - dashboard.api
-    - auth.api
-    - mssql 
-    networks: 
-     - cluster_network
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - users.api
+      - tasks.api
+      - dashboard.api
+      - auth.api
+      - mssql
+    volumes:
+      - ./certs:/app/certs:ro
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080;https://+:8081
+      ASPNETCORE_HTTPS_PORT: 8081
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: password
+    networks:
+      - cluster_network
 
   users.api:
-    image: ${DOCKER_REGISTRY-}usersapi
     build:
       context: .
       dockerfile: services/Users.API/Dockerfile
     expose:
-    - "8080"
-    networks: 
-     - cluster_network
-
+      - "8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+    networks:
+      - cluster_network
 
   tasks.api:
-    image: ${DOCKER_REGISTRY-}tasksapi
     build:
       context: .
       dockerfile: services/Tasks.API/Dockerfile
     expose:
-    - "8080"
-    networks: 
-     - cluster_network
-
+      - "8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+    networks:
+      - cluster_network
 
   dashboard.api:
-    image: ${DOCKER_REGISTRY-}dashboardapi
     build:
       context: .
       dockerfile: services/Dashboard.API/Dockerfile
     expose:
-    - "8080"
-    networks: 
-     - cluster_network
-
+      - "8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+    networks:
+      - cluster_network
 
   auth.api:
-    image: ${DOCKER_REGISTRY-}authapi
     build:
       context: .
       dockerfile: services/Auth.API/Dockerfile
     expose:
-    - "8080"
-    networks: 
-    - cluster_network
+      - "8080"
     environment:
-    - ConnectionStrings__DefaultConnection=Server=mssql;Database=auth_db;User=sa;Password=TestPassword123;TrustServerCertificate=True
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: >
+        Server=mssql;
+        Database=auth_db;
+        User=sa;
+        Password=TestPassword123;
+        TrustServerCertificate=True
     depends_on:
-    - mssql
+      - mssql
+    networks:
+      - cluster_network
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: mssql
     environment:
-     - ACCEPT_EULA=Y
-     - SA_PASSWORD=TestPassword123
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: 'TestPassword123'
     ports:
-     - "1433:1433"
-    networks: 
-     - cluster_network
+      - "1433:1433"
+    networks:
+      - cluster_network
 
   clusterfrontend:
-    image: ${DOCKER_REGISTRY-}clusterfrontend
     build:
       context: .
       dockerfile: frontend/ClusterFrontend/ClusterFrontend/Dockerfile
     ports:
       - "5002:5002"
+      - "5003:5003"
+    volumes:
+      - ./certs:/app/certs:ro
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5002;https://+:5003
+      ASPNETCORE_HTTPS_PORT: 5003
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: password
     networks:
       - cluster_network
 

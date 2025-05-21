@@ -5,8 +5,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 # USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
-
+EXPOSE 8081
+ENV ASPNETCORE_URLS=http://+:8080;https://+:8081
+ENV ASPNETCORE_HTTPS_PORT=8081
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password=password
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/devcert.pfx
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build

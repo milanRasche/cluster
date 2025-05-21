@@ -6,6 +6,7 @@ using Auth.API.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Auth.API.Logic;
+using System.Security.Claims;
 
 namespace Auth.API.Controllers
 {
@@ -24,7 +25,7 @@ namespace Auth.API.Controllers
         [Authorize]
         public async Task<IActionResult> RegisterRunner([FromBody] RegisterRunnerRequest request)
         {
-            var user = await DoesUserExist(User.FindFirst("sub")?.Value);
+            var user = await DoesUserExist(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             if (user == null)
             {
                 return Unauthorized();
