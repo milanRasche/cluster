@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: users
-          image: users.api:latest
+          image: cluster-users.api:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:

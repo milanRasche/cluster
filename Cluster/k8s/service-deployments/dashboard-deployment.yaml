@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: dashboard
-          image: dashboard.api:latest
+          image: cluster-dashboard.api:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:

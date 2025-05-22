@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: clusterfrontend:latest
+          image: cluster-clusterfrontend:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 5002
           env:

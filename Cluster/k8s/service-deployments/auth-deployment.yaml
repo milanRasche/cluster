@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: auth
-          image: auth.api:latest
+          image: cluster-auth.api:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:

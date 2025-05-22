@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: tasks
-          image: tasks.api:latest
+          image: cluster-tasks.api:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:
