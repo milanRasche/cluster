@@ -1,0 +1,55 @@
+# k8s/service-deployments/gateway-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+        - name: gateway
+          image: gateway.api:latest
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: "http://+:8080;https://+:8081"
+            - name: ASPNETCORE_HTTPS_PORT
+              value: "8081"
+          volumeMounts:
+            - name: cert-volume
+              mountPath: /app/certs
+      volumes:
+        - name: cert-volume
+          secret:
+            secretName: devcert
+            items:
+              - key: devcert.pfx
+                path: devcert.pfx
+---
+# k8s/service-deployments/gateway-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  type: NodePort
+  selector:
+    app: gateway
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: https
+      port: 443
+      targetPort: 8081

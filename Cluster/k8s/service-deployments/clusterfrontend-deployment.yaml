@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clusterfrontend
+  labels:
+    app: clusterfrontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clusterfrontend
+  template:
+    metadata:
+      labels:
+        app: clusterfrontend
+    spec:
+      containers:
+        - name: frontend
+          image: clusterfrontend:latest
+          ports:
+            - containerPort: 5002
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: "http://+:5002;https://+:5003"
+            - name: ASPNETCORE_HTTPS_PORT
+              value: "5003"
+          volumeMounts:
+            - name: certs
+              mountPath: /app/certs
+      volumes:
+        - name: certs
+          secret:
+            secretName: devcert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clusterfrontend
+spec:
+  type: ClusterIP
+  selector:
+    app: clusterfrontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5002
+    - name: https
+      port: 443
+      targetPort: 5003

@@ -1,0 +1,13 @@
+# k8s/mssql-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql
+spec:
+  type: ClusterIP
+  selector:
+    app: mssql
+  ports:
+    - name: tcp
+      port: 1433
+      targetPort: 1433

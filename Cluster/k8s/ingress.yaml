@@ -1,0 +1,37 @@
+# k8s/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cluster-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+        - cluster.local   # whatever host you choose in /etc/hosts
+      secretName: devcert
+  rules:
+    - host: cluster.local
+      http:
+        paths:
+          - path: /users
+            pathType: Prefix
+            backend:
+              service:
+                name: users
+                port:
+                  number: 80
+          - path: /tasks
+            pathType: Prefix
+            backend:
+              service:
+                name: tasks
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 80
