@@ -11,7 +11,7 @@ namespace ClusterFrontend.Services
         private readonly HttpClient _httpClient;
         private readonly IJSRuntime _jsRuntime;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private const string AuthApiURL = "http://gateway.api:8080/auth/UserAuth";
+        private const string AuthApiURL = "https://cluster.local/auth/UserAuth";
 
         public AuthService(IHttpClientFactory httpClientFactory, IJSRuntime jsRuntime, IHttpContextAccessor httpContextAccessor)
         {
