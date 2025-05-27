@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{75C51044-CF7
 	ProjectSection(SolutionItems) = preProject
 		k8s\ingress.yaml = k8s\ingress.yaml
 		k8s\mssql-deployment.yaml = k8s\mssql-deployment.yaml
+		k8s\mssql-service.yaml = k8s\mssql-service.yaml
 		k8s\secrets.yaml = k8s\secrets.yaml
 	EndProjectSection
 EndProject
@@ -46,10 +47,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service-deployments", "serv
 		k8s\service-deployments\auth-deployment.yaml = k8s\service-deployments\auth-deployment.yaml
 		k8s\service-deployments\clusterfrontend-deployment.yaml = k8s\service-deployments\clusterfrontend-deployment.yaml
 		k8s\service-deployments\gateway-deployment.yaml = k8s\service-deployments\gateway-deployment.yaml
-		k8s\service-deployments\dashboard-deployment.yaml = k8s\service-deployments\dashboard-deployment.yaml
-		k8s\mssql-service.yaml = k8s\mssql-service.yaml
-		k8s\service-deployments\tasks-deployment .yaml = k8s\service-deployments\tasks-deployment .yaml
-		k8s\service-deployments\users-deployment.yaml = k8s\service-deployments\users-deployment.yaml
 	EndProjectSection
 EndProject
 Global

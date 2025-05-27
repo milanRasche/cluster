@@ -14,14 +14,7 @@ spec:
   rules:
     - host: cluster.local
       http:
-        paths:
-          - path: /dashboard
-            pathType: Prefix
-            backend:
-              service:
-                name: dashboard
-                port:
-                  number: 80
+        paths:    
           - path: /
             pathType: Prefix
             backend:
@@ -34,19 +27,5 @@ spec:
             backend:
               service:
                 name: auth
-                port:
-                  number: 80
-          - path: /users
-            pathType: Prefix
-            backend:
-              service:
-                name: users
-                port:
-                  number: 80
-          - path: /tasks
-            pathType: Prefix
-            backend:
-              service:
-                name: tasks
                 port:
                   number: 80

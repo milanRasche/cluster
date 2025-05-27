@@ -11,7 +11,8 @@ var jwtKey = builder.Configuration["Jwt:Key"];
 
 //Add database access
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+    sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
 builder.Services.AddControllers();
 
@@ -66,6 +67,12 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint($"{pathBase}/swagger/v1/swagger.json", "Auth API V1");
         c.RoutePrefix = "swagger";
     });
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
 }
 
 app.UseHttpsRedirection();

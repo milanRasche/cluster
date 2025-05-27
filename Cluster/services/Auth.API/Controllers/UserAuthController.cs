@@ -48,7 +48,7 @@ namespace Auth.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(new { error = ex.Message });
             }
         }
 
