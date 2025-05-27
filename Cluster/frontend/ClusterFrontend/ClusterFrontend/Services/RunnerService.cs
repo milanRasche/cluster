@@ -12,7 +12,7 @@ namespace ClusterFrontend.Services
     public class RunnerService : IRunnerService
     {
         private readonly HttpClient _httpClient;
-        private const string RunnerApiURL = "http://gateway.api:8080/auth/RunnerAuth";
+        private const string RunnerApiURL = "http://gateway/auth/UserAuth";
 
         public RunnerService(IHttpClientFactory httpClientFactory)
         {

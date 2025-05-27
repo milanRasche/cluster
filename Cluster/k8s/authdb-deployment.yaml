@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mssql
+  name: auth-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mssql
+      app: auth-db
   template:
     metadata:
       labels:
-        app: mssql
+        app: auth-db
     spec:
       containers:   
-        - name: mssql
+        - name: auth-db
           image: mcr.microsoft.com/mssql/server:2019-latest
           env:
             - name: ACCEPT_EULA
@@ -34,10 +34,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mssql
+  name: auth-db
 spec:
   selector:
-    app: mssql
+    app: auth-db
   ports:
     - port: 1433
       targetPort: 1433

@@ -11,7 +11,7 @@ services:
       - tasks.api
       - dashboard.api
       - auth.api
-      - mssql
+      - auth-db
     volumes:
       - ./certs:/app/certs:ro
     environment:
@@ -69,26 +69,28 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__DefaultConnection: >
-        Server=mssql;
+        Server=auth-db,1433;
         Database=auth_db;
         User=sa;
         Password=TestPassword123;
         TrustServerCertificate=True
     depends_on:
-      - mssql
+      - auth-db
     networks:
       - cluster_network
 
-  mssql:
+  auth-db:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: mssql
+    container_name: mssql-auth
+    networks:
+      cluster_network:
+        aliases:
+        - auth-db
     environment:
       ACCEPT_EULA: 'Y'
       SA_PASSWORD: 'TestPassword123'
     ports:
       - "1433:1433"
-    networks:
-      - cluster_network
 
   clusterfrontend:
     build:
