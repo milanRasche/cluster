@@ -30,14 +30,13 @@ spec:
         - name: mssqldata
           emptyDir: {}  # for dev only; swap to a PVC for persistence
 ---
-# k8s/mssql-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: auth-db
 spec:
   selector:
-    app: auth-db
+    app: auth-db    
   ports:
     - port: 1433
       targetPort: 1433

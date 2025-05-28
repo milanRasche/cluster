@@ -37,8 +37,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{75C51044-CF78-40F3-8872-C875EDB11776}"
 	ProjectSection(SolutionItems) = preProject
 		k8s\ingress.yaml = k8s\ingress.yaml
-		k8s\mssql-deployment.yaml = k8s\mssql-deployment.yaml
-		k8s\mssql-service.yaml = k8s\mssql-service.yaml
+		k8s\authdb-deployment.yaml = k8s\authdb-deployment.yaml
 		k8s\secrets.yaml = k8s\secrets.yaml
 	EndProjectSection
 EndProject

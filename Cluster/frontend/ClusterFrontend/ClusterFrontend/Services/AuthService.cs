@@ -11,16 +11,15 @@ namespace ClusterFrontend.Services
         private readonly HttpClient _httpClient;
         private readonly IJSRuntime _jsRuntime;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private const string AuthApiURL = "http://gateway/auth/UserAuth";
 
-        public AuthService(IHttpClientFactory httpClientFactory, IJSRuntime jsRuntime, IHttpContextAccessor httpContextAccessor)
+        // HttpClient comes pre‐configured with BaseAddress from ApiSettings
+        public AuthService(HttpClient httpClient, IJSRuntime jsRuntime, IHttpContextAccessor httpContextAccessor)
         {
-            _httpClient = httpClientFactory.CreateClient();
-            _httpClient.BaseAddress = new Uri(AuthApiURL);
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
+            _httpClient = httpClient;
             _jsRuntime = jsRuntime;
             _httpContextAccessor = httpContextAccessor;
         }
+
         public async Task<bool> Register(UserRegisterRequest request)
         {
             try
@@ -28,7 +27,7 @@ namespace ClusterFrontend.Services
                 string jsonContent = JsonSerializer.Serialize(request);
 
                 var response = await _httpClient.PostAsync(
-                    $"{AuthApiURL}/register",
+                    $"Auth/UserAuth/register",
                     new StringContent(jsonContent, Encoding.UTF8, "application/json")
                 );
 
@@ -53,7 +52,7 @@ namespace ClusterFrontend.Services
             {
                 string jsonContent = JsonSerializer.Serialize(request);
                 var response = await _httpClient.PostAsync(
-                    $"{AuthApiURL}/login",
+                    $"Auth/UserAuth/login",
                     new StringContent(jsonContent, Encoding.UTF8, "application/json")
                 );
                 if (response.IsSuccessStatusCode)
@@ -106,7 +105,7 @@ namespace ClusterFrontend.Services
 
                     // Call the correct logout endpoint
                     var response = await _httpClient.PostAsync(
-                        $"{AuthApiURL}/logout",
+                        $"UserAuth/logout",
                         content);
 
                     if (!response.IsSuccessStatusCode)

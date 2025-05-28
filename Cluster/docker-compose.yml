@@ -7,55 +7,16 @@ services:
       - "8080:8080"
       - "8081:8081"
     depends_on:
-      - users.api
-      - tasks.api
-      - dashboard.api
       - auth.api
       - auth-db
     volumes:
       - ./certs:/app/certs:ro
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Docker
       ASPNETCORE_URLS: http://+:8080;https://+:8081
       ASPNETCORE_HTTPS_PORT: 8081
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
-    networks:
-      - cluster_network
-
-  users.api:
-    build:
-      context: .
-      dockerfile: services/Users.API/Dockerfile
-    expose:
-      - "8080"
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
-    networks:
-      - cluster_network
-
-  tasks.api:
-    build:
-      context: .
-      dockerfile: services/Tasks.API/Dockerfile
-    expose:
-      - "8080"
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
-    networks:
-      - cluster_network
-
-  dashboard.api:
-    build:
-      context: .
-      dockerfile: services/Dashboard.API/Dockerfile
-    expose:
-      - "8080"
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
     networks:
       - cluster_network
 
@@ -107,6 +68,9 @@ services:
       ASPNETCORE_HTTPS_PORT: 5003
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
+        - APISETTINGS__AUTHAPIBASEURL=http://gateway.api:8080/
+    depends_on:
+        - gateway.api
     networks:
       - cluster_network
 

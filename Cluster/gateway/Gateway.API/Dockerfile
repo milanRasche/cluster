@@ -30,4 +30,5 @@ RUN dotnet publish "./Gateway.API.csproj" -c $BUILD_CONFIGURATION -o /app/publis
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY gateway/Gateway.API/appsettings.*.json .
 ENTRYPOINT ["dotnet", "Gateway.API.dll"]
