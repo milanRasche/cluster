@@ -17,6 +17,7 @@ services:
       ASPNETCORE_HTTPS_PORT: 8081
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
+      ReverseProxy__Clusters__auth_cluster__Destinations__auth_api__Address: http://auth.api:8080/
     networks:
       - cluster_network
 

@@ -22,11 +22,13 @@ spec:
             - containerPort: 8081
           env:
             - name: ASPNETCORE_ENVIRONMENT
-              value: Development
+              value: Kubernetes
             - name: ASPNETCORE_URLS
               value: "http://+:8080;https://+:8081"
             - name: ASPNETCORE_HTTPS_PORT
               value: "8081"
+            - name: ReverseProxy__Clusters__auth_cluster__Destinations__auth_api__Address
+              value: "http://auth:80/"
           volumeMounts:
             - name: cert-volume
               mountPath: /app/certs
