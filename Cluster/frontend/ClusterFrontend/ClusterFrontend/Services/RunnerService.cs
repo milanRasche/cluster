@@ -10,18 +10,9 @@ using Microsoft.JSInterop;
 
 namespace ClusterFrontend.Services
 {
-    public class RunnerService : IRunnerService
+    public class RunnerService(HttpClient httpClient) : IRunnerService
     {
-        private readonly HttpClient _httpClient;
-
-        // HttpClient comes pre‐configured with BaseAddress from ApiSettings
-        public RunnerService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-
-
-        //private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
+        private readonly HttpClient _httpClient = httpClient;
 
         public async Task<TaskRunner?> RequestNewRunner(RequestRunner request)
         {
@@ -71,12 +62,12 @@ namespace ClusterFrontend.Services
 
                 var runners = await response.Content.ReadFromJsonAsync<List<TaskRunner>>();
 
-                return runners ?? new List<TaskRunner>();
+                return runners ?? [];
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[GetRunners] Error: {ex.Message}");
-                return new List<TaskRunner>();
+                return [];
             }
         }
     }

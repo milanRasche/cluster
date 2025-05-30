@@ -64,7 +64,7 @@ namespace Auth.API.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserRunners()
         {
-            var user = await DoesUserExist(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var user = await DoesUserExist(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, true);
             if (user == null)
             {
                 return Unauthorized();

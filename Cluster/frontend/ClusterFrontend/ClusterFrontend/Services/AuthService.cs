@@ -6,19 +6,11 @@ using Microsoft.JSInterop;
 
 namespace ClusterFrontend.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService(HttpClient httpClient, IJSRuntime jsRuntime, IHttpContextAccessor httpContextAccessor) : IAuthService
     {
-        private readonly HttpClient _httpClient;
-        private readonly IJSRuntime _jsRuntime;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        // HttpClient comes pre‐configured with BaseAddress from ApiSettings
-        public AuthService(HttpClient httpClient, IJSRuntime jsRuntime, IHttpContextAccessor httpContextAccessor)
-        {
-            _httpClient = httpClient;
-            _jsRuntime = jsRuntime;
-            _httpContextAccessor = httpContextAccessor;
-        }
+        private readonly HttpClient _httpClient = httpClient;
+        private readonly IJSRuntime _jsRuntime = jsRuntime;
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
         public async Task<bool> Register(UserRegisterRequest request)
         {

@@ -25,26 +25,24 @@ namespace Auth.API.Controllers
         {
             try
             {
+                if (await _context.Users.AnyAsync(u => u.UserEmail == request.UserEmail))
+                {
+                    return BadRequest("User already exists.");
+                }
 
-           
-            if (await _context.Users.AnyAsync(u => u.UserEmail == request.UserEmail))
-            {
-                return BadRequest("User already exists.");
-            }
+                var hashedPassword = _passwordHasher.HashPassword(request.Password);
 
-            var hashedPassword = _passwordHasher.HashPassword(request.Password);
+                var user = new User
+                {
+                    Username = request.Username,
+                    UserEmail = request.UserEmail,
+                    PasswordHash = hashedPassword,
+                };
 
-            var user = new User
-            {
-                Username = request.Username,
-                UserEmail = request.UserEmail,
-                PasswordHash = hashedPassword,
-            };
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { user.UUID, user.UserEmail });
+                return Ok(new { user.UUID, user.UserEmail });
             }
             catch (Exception ex)
             {
