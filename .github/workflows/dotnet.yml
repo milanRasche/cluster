@@ -43,5 +43,7 @@ jobs:
       working-directory: Cluster/
 
     - name: Security Scan (NuGet Vulnerabilities)
-      run: dotnet list Cluster.sln package --vulnerable
       working-directory: Cluster/
+      run: |
+        find . -type f -name '*.csproj' ! -name 'docker-compose.dcproj' -print0 \
+          | xargs -0 -n1 dotnet list package --vulnerable
