@@ -27,6 +27,8 @@ spec:
               value: "http://+:5002;https://+:5003"
             - name: ASPNETCORE_HTTPS_PORT
               value: "5003"
+            - name: ApiSettings__AuthApiBaseUrl
+              value: "http://gateway/"
           volumeMounts:
             - name: certs
               mountPath: /app/certs

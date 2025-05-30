@@ -9,6 +9,6 @@ namespace ClusterFrontend.Objects
         public string Description { get; set; }
         public string? Secret { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime LastConnected { get; set; }
+        public DateTime? LastConnected { get; set; }
     }
 }

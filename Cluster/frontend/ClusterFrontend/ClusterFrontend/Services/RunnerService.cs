@@ -6,20 +6,20 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using Microsoft.JSInterop;
 
 namespace ClusterFrontend.Services
 {
     public class RunnerService : IRunnerService
     {
         private readonly HttpClient _httpClient;
-        private const string RunnerApiURL = "http://gateway/auth/UserAuth";
 
-        public RunnerService(IHttpClientFactory httpClientFactory)
+        // HttpClient comes pre‐configured with BaseAddress from ApiSettings
+        public RunnerService(HttpClient httpClient)
         {
-            _httpClient = httpClientFactory.CreateClient("AuthorizedClient");
-            _httpClient.BaseAddress = new Uri(RunnerApiURL);
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
+            _httpClient = httpClient;
         }
+
 
         //private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
 
@@ -30,7 +30,7 @@ namespace ClusterFrontend.Services
                 string jsonContent = JsonSerializer.Serialize(request);
 
                 // Create a request message to see the headers before sending
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{RunnerApiURL}/register")
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"Auth/RunnerAuth/register")
                 {
                     Content = new StringContent(jsonContent, Encoding.UTF8, "application/json")
                 };
@@ -61,7 +61,7 @@ namespace ClusterFrontend.Services
         {
             try
             {
-                var response = await _httpClient.PostAsync($"{RunnerApiURL}/user-runners", null);
+                var response = await _httpClient.PostAsync($"Auth/RunnerAuth/runners", null);
 
                 if (!response.IsSuccessStatusCode)
                 {

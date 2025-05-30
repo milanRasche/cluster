@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Auth.API.Objects;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Auth.API.Data
 {
