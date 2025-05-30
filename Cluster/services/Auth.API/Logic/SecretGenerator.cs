@@ -4,7 +4,7 @@ namespace Auth.API.Logic
 {
     public class SecretGenerator : ISecretGenerator
     {
-        private readonly static Random random = new Random();
+        private readonly static Random random = new();
 
         public string Generate128CharSecret()
         {

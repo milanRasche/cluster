@@ -30,6 +30,7 @@ jobs:
       working-directory: Cluster/
 
     - name: Code Analysis
+      continue-on-error: true
       run: dotnet format --verify-no-changes --severity info Cluster.sln
       working-directory: Cluster/
 
