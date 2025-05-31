@@ -16,15 +16,15 @@ jobs:
         include:
           - service: gateway.api
             context: Cluster
-            dockerfile: gateway/Gateway.API/Dockerfile
+            dockerfile: Cluster/gateway/Gateway.API/Dockerfile
             image_name: milanfontys/cluster_gateway_service
           - service: auth.api
             context: Cluster
-            dockerfile: services/Auth.API/Dockerfile
+            dockerfile: Cluster/services/Auth.API/Dockerfile
             image_name: milanfontys/cluster_auth_service
           - service: clusterfrontend
             context: Cluster
-            dockerfile: frontend/ClusterFrontend/ClusterFrontend/Dockerfile
+            dockerfile: Cluster/frontend/ClusterFrontend/ClusterFrontend/Dockerfile
             image_name: milanfontys/cluster_frontend
 
     steps:
