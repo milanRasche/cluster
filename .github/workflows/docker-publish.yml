@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows:
+      - ".NET"
+    types:
+      - completed
 
 jobs:
   build-and-push:
@@ -14,15 +19,15 @@ jobs:
         include:
           - service: gateway.api
             context: .
-            dockerfile: gateway/Gateway.API/Dockerfile
+            dockerfile: Cluster/gateway/Gateway.API/Dockerfile
             image_name: milanfontys/cluster_gateway_service
           - service: auth.api
             context: .
-            dockerfile: services/Auth.API/Dockerfile
+            dockerfile: Cluster/services/Auth.API/Dockerfile
             image_name: milanfontys/cluster_auth_service
           - service: clusterfrontend
             context: .
-            dockerfile: frontend/ClusterFrontend/ClusterFrontend/Dockerfile
+            dockerfile: Cluster/frontend/ClusterFrontend/ClusterFrontend/Dockerfile
             image_name: milanfontys/cluster_frontend
 
     steps:
