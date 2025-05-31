@@ -3,59 +3,22 @@ services:
     build:
       context: .
       dockerfile: gateway/Gateway.API/Dockerfile
+    image: milanfontys/cluster_gateway_service:${TAG:-latest}
     ports:
       - "8080:8080"
       - "8081:8081"
     depends_on:
-      - users.api
-      - tasks.api
-      - dashboard.api
       - auth.api
-      - mssql
+      - auth-db
     volumes:
       - ./certs:/app/certs:ro
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Docker
       ASPNETCORE_URLS: http://+:8080;https://+:8081
       ASPNETCORE_HTTPS_PORT: 8081
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
-    networks:
-      - cluster_network
-
-  users.api:
-    build:
-      context: .
-      dockerfile: services/Users.API/Dockerfile
-    expose:
-      - "8080"
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
-    networks:
-      - cluster_network
-
-  tasks.api:
-    build:
-      context: .
-      dockerfile: services/Tasks.API/Dockerfile
-    expose:
-      - "8080"
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
-    networks:
-      - cluster_network
-
-  dashboard.api:
-    build:
-      context: .
-      dockerfile: services/Dashboard.API/Dockerfile
-    expose:
-      - "8080"
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
+      ReverseProxy__Clusters__auth_cluster__Destinations__auth_api__Address: http://auth.api:8080/
     networks:
       - cluster_network
 
@@ -63,37 +26,44 @@ services:
     build:
       context: .
       dockerfile: services/Auth.API/Dockerfile
+    image: milanfontys/cluster_auth_service:${TAG:-latest}
     expose:
       - "8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__DefaultConnection: >
-        Server=mssql;
+        Server=auth-db,1433;
         Database=auth_db;
         User=sa;
         Password=TestPassword123;
         TrustServerCertificate=True
+      Jwt__Key:      SuperSecretKeyForJWT123456789abcd123abc123abc123abc123
+      Jwt__Issuer:   localhost
+      Jwt__Audience: localhost
     depends_on:
-      - mssql
+      - auth-db
     networks:
       - cluster_network
 
-  mssql:
+  auth-db:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: mssql
+    container_name: mssql-auth
+    networks:
+      cluster_network:
+        aliases:
+        - auth-db
     environment:
       ACCEPT_EULA: 'Y'
       SA_PASSWORD: 'TestPassword123'
     ports:
       - "1433:1433"
-    networks:
-      - cluster_network
 
   clusterfrontend:
     build:
       context: .
       dockerfile: frontend/ClusterFrontend/ClusterFrontend/Dockerfile
+    image: milanfontys/cluster_frontend:${TAG:-latest}
     ports:
       - "5002:5002"
       - "5003:5003"
@@ -105,6 +75,9 @@ services:
       ASPNETCORE_HTTPS_PORT: 5003
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
+        - APISETTINGS__AUTHAPIBASEURL=http://gateway.api:8080/
+    depends_on:
+        - gateway.api
     networks:
       - cluster_network
 

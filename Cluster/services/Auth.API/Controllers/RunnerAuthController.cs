@@ -60,11 +60,11 @@ namespace Auth.API.Controllers
             });
         }
 
-        [HttpPost("user-runners")]
+        [HttpPost("runners")]
         [Authorize]
         public async Task<IActionResult> GetUserRunners()
         {
-            var user = await DoesUserExist(User.FindFirst("sub")?.Value, includeRunners: true);
+            var user = await DoesUserExist(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, true);
             if (user == null)
             {
                 return Unauthorized();

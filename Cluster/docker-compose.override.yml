@@ -1,54 +1,27 @@
 services:
-  users.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-    expose:
-      - "8080"
-    ports: []
-
-  tasks.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-    expose:
-      - "8080"
-    ports: []
-
   auth.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-    expose:
-      - "8080"
-    ports: []
-
-  dashboard.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-    expose:
-      - "8080"
-    ports: []
-
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080"
   gateway.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080;https://+:8081
-      - ASPNETCORE_HTTPS_PORT=8081
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/devcert.pfx
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080;https://+:8081"
+      ASPNETCORE_HTTPS_PORT: "8081"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: password
     ports:
       - "8080:8080"
       - "8081:8081"
 
   clusterfrontend:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5002;https://+:5003
-      - ASPNETCORE_HTTPS_PORT=5003
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/devcert.pfx
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:5002;https://+:5003"
+      ASPNETCORE_HTTPS_PORT: "5003"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: password
+      APISETTINGS__AUTHAPIBASEURL: "http://gateway.api:8080/"
     ports:
       - "5002:5002"
       - "5003:5003"

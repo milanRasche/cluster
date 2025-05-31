@@ -34,6 +34,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClusterFrontend.Client", "f
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{74B79BAF-F510-4B5D-B08C-365D21AD75D1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{75C51044-CF78-40F3-8872-C875EDB11776}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\ingress.yaml = k8s\ingress.yaml
+		k8s\authdb-deployment.yaml = k8s\authdb-deployment.yaml
+		k8s\secrets.yaml = k8s\secrets.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service-deployments", "service-deployments", "{811CC1E5-A8AC-472C-AFBF-37DDA227BCC0}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\service-deployments\auth-deployment.yaml = k8s\service-deployments\auth-deployment.yaml
+		k8s\service-deployments\clusterfrontend-deployment.yaml = k8s\service-deployments\clusterfrontend-deployment.yaml
+		k8s\service-deployments\gateway-deployment.yaml = k8s\service-deployments\gateway-deployment.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +103,7 @@ Global
 		{39A92B22-D75B-4596-AF68-FE6AF3DEA931} = {4E02A824-AB71-413C-886D-B8797497F398}
 		{475EDD76-FC64-48F7-A6DD-C547839AFC99} = {74B79BAF-F510-4B5D-B08C-365D21AD75D1}
 		{A605B2FC-3CB3-407B-BCC0-D428C4C4CAA1} = {74B79BAF-F510-4B5D-B08C-365D21AD75D1}
+		{811CC1E5-A8AC-472C-AFBF-37DDA227BCC0} = {75C51044-CF78-40F3-8872-C875EDB11776}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4366A080-6A4B-4603-92F2-3430A146C3DA}

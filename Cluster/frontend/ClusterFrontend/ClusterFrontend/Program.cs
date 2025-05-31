@@ -1,7 +1,9 @@
 using ClusterFrontend.Components;
 using ClusterFrontend.Interface;
 using ClusterFrontend.Middleware;
+using ClusterFrontend.Objects;
 using ClusterFrontend.Services;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,16 +18,24 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 // Register JWTAuthorisationHandler after HttpContextAccessor
 builder.Services.AddTransient<JWTAuthorisationHandler>();
 
-// Register the HttpClient with the handler
-builder.Services.AddHttpClient("AuthorizedClient", client =>
+builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+
+//IAuthService HTTP Client
+builder.Services.AddHttpClient<IAuthService, AuthService>((sp, client) =>
+    {
+        var opts = sp.GetRequiredService<IOptions<ApiSettings>>().Value;
+        client.BaseAddress = new Uri(opts.AuthApiBaseUrl);
+        client.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
+    });
+
+//IRunnerService HTTP Client
+builder.Services.AddHttpClient<IRunnerService, RunnerService>((sp, client) =>
 {
+    var opts = sp.GetRequiredService<IOptions<ApiSettings>>().Value;
+    client.BaseAddress = new Uri(opts.AuthApiBaseUrl);
     client.DefaultRequestHeaders.Add("User-Agent", "ClusterFrontend");
 })
 .AddHttpMessageHandler<JWTAuthorisationHandler>();
-
-// Register other services
-builder.Services.AddScoped<IRunnerService, RunnerService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

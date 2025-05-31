@@ -50,6 +50,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 
+Console.WriteLine("Proxy URL = " + builder.Configuration["ReverseProxy:Clusters:auth_cluster:Destinations:auth_api:Address"]);
+
+
 var app = builder.Build();
 
 //app.UseHttpsRedirection();

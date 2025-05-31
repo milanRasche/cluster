@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClusterFrontend.Middleware
 {
-    public class JWTAuthorisationHandler : DelegatingHandler
+    public class JWTAuthorisationHandler(IHttpContextAccessor httpContextAccessor) : DelegatingHandler
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public JWTAuthorisationHandler(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {

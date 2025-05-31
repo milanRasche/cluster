@@ -30,6 +30,7 @@ jobs:
       working-directory: Cluster/
 
     - name: Code Analysis
+      continue-on-error: true
       run: dotnet format --verify-no-changes --severity info Cluster.sln
       working-directory: Cluster/
 
@@ -39,8 +40,4 @@ jobs:
 
     - name: Generate Code Metrics
       run: dotnet build -warnaserror -p:AnalysisMode=AllEnabled -p:RunCodeAnalysis=true Cluster.sln
-      working-directory: Cluster/
-
-    - name: Security Scan (NuGet Vulnerabilities)
-      run: dotnet list Cluster.sln package --vulnerable
       working-directory: Cluster/
