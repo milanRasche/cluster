@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: gateway/Gateway.API/Dockerfile
+    image: milanfontys/cluster_gateway_service:${TAG:-latest}
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -25,6 +26,7 @@ services:
     build:
       context: .
       dockerfile: services/Auth.API/Dockerfile
+    image: milanfontys/cluster_auth_service:${TAG:-latest}
     expose:
       - "8080"
     environment:
@@ -36,6 +38,9 @@ services:
         User=sa;
         Password=TestPassword123;
         TrustServerCertificate=True
+      Jwt__Key:      SuperSecretKeyForJWT123456789abcd123abc123abc123abc123
+      Jwt__Issuer:   localhost
+      Jwt__Audience: localhost
     depends_on:
       - auth-db
     networks:
@@ -58,6 +63,7 @@ services:
     build:
       context: .
       dockerfile: frontend/ClusterFrontend/ClusterFrontend/Dockerfile
+    image: milanfontys/cluster_frontend:${TAG:-latest}
     ports:
       - "5002:5002"
       - "5003:5003"

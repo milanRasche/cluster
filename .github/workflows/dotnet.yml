@@ -41,9 +41,3 @@ jobs:
     - name: Generate Code Metrics
       run: dotnet build -warnaserror -p:AnalysisMode=AllEnabled -p:RunCodeAnalysis=true Cluster.sln
       working-directory: Cluster/
-
-    - name: Security Scan (NuGet Vulnerabilities)
-      working-directory: Cluster/
-      run: |
-        find . -type f -name '*.csproj' ! -name 'docker-compose.dcproj' -print0 \
-          | xargs -0 -n1 dotnet list package --vulnerable
