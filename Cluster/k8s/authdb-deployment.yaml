@@ -22,7 +22,7 @@ spec:
             - name: SA_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mssql-secret
+                  name: devcert
                   key: SA_PASSWORD
           ports:
             - containerPort: 1433

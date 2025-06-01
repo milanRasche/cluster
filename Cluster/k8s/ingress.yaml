@@ -1,12 +1,12 @@
-# k8s/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: cluster-ingress
   annotations:
-    # keep HTTPS enforced if you like
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - cluster.local
@@ -14,18 +14,19 @@ spec:
   rules:
     - host: cluster.local
       http:
-        paths:    
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 80
+
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: dashboard
-                port:
-                  number: 80
-          - path: /auth
-            pathType: Prefix
-            backend:
-              service:
-                name: auth
+                name: clusterfrontend
                 port:
                   number: 80

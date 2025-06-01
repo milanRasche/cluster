@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: cluster-gateway.api:latest
-          imagePullPolicy: Never
+          image: milanfontys/cluster_gateway_service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
             - containerPort: 8081

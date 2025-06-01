@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: cluster-clusterfrontend:latest
-          imagePullPolicy: Never
+          image: milanfontys/cluster_frontend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5002
           env:
