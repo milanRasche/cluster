@@ -34,4 +34,4 @@ jobs:
       # 4) Apply every YAML under /k8s/ to AKS
       - name: Deploy manifests to AKS
         run: |
-          kubectl apply -f Cluster\k8s -f Cluster\k8s\service-deployments
+          kubectl apply -f Cluster/k8s -f Cluster/k8s/service-deployments
