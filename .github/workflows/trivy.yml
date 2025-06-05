@@ -25,6 +25,9 @@ jobs:
           - image: milanfontys/cluster_frontend
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Sanitize image name for file output
         id: sanitize
         run: |
