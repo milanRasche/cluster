@@ -70,10 +70,10 @@ jobs:
         with:
           name: sbom-${{ steps.sanitize.outputs.filename }}
           path: sbom-${{ steps.sanitize.outputs.filename }}.json
-
+      
       - name: Detect secrets in repository
         run: |
-          trivy secret --format sarif -o secrets-results.sarif .
+          trivy secret --format sarif --output secrets-results.sarif .
       
       - name: Upload secret scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
