@@ -56,21 +56,23 @@ jobs:
           output: 'trivy-results-${{ steps.sanitize.outputs.filename }}.sarif'
           severity: 'CRITICAL,HIGH'
           trivyignore: .trivyignore
-        continue-on-error: true   # don’t fail the job if there are no results or a minor warning
+        continue-on-error: true
 
       - name: Verify SARIF exists (debug)
+        id: verify_vuln
         run: |
           if [ ! -s trivy-results-${{ steps.sanitize.outputs.filename }}.sarif ]; then
-            echo "WARNING: SARIF is empty or missing!"
-            ls -l .
+            echo "SARIF is empty or missing!" >&2
+            ls -l trivy-results-${{ steps.sanitize.outputs.filename }}.sarif
             exit 1
           fi
+          echo "exists=true" >> "$GITHUB_OUTPUT"
 
       - name: Upload Trivy scan results to GitHub Security tab
+        if: ${{ steps.verify_vuln.outputs.exists == 'true' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results-${{ steps.sanitize.outputs.filename }}.sarif'
-          fail_on_error: false
 
       - name: Detect secrets in repository (v0.60 syntax)
         run: |
@@ -79,18 +81,20 @@ jobs:
         continue-on-error: true
 
       - name: Verify secret SARIF exists (debug)
+        id: verify_secrets
         run: |
           if [ ! -s secrets-results.sarif ]; then
-            echo "WARNING: secrets-results.sarif is empty or missing!"
-            ls -l .
+            echo "secrets-results.sarif is empty or missing!" >&2
+            ls -l secrets-results.sarif
             exit 1
           fi
+          echo "exists=true" >> "$GITHUB_OUTPUT"
 
       - name: Upload secret scan results to GitHub Security tab
+        if: ${{ steps.verify_secrets.outputs.exists == 'true' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: secrets-results.sarif
-          fail_on_error: false
 
       - name: Scan IaC configurations for misconfigurations
         run: |
@@ -98,15 +102,17 @@ jobs:
         continue-on-error: true
 
       - name: Verify IaC SARIF exists (debug)
+        id: verify_iac
         run: |
           if [ ! -s iac-results.sarif ]; then
-            echo "WARNING: iac-results.sarif is empty or missing!"
-            ls -l .
+            echo "iac-results.sarif is empty or missing!" >&2
+            ls -l iac-results.sarif
             exit 1
           fi
+          echo "exists=true" >> "$GITHUB_OUTPUT"
 
       - name: Upload IaC scan results to GitHub Security tab
+        if: ${{ steps.verify_iac.outputs.exists == 'true' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: iac-results.sarif
-          fail_on_error: false
