@@ -28,6 +28,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Trivy cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/trivy
+          key: ${{ runner.os }}-trivy-db
+
       - name: Sanitize image name for file output
         id: sanitize
         run: |
@@ -48,3 +54,15 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results-${{ steps.sanitize.outputs.filename }}.sarif'
+
+      - name: Generate SBOM (CycloneDX) for ${{ matrix.image }}
+        run: |
+          trivy image --format cyclonedx -o sbom-${{ steps.sanitize.outputs.filename }}.json ${{ matrix.image }}:latest
+
+      - name: Detect secrets in repository
+        run: |
+          trivy secret --severity CRITICAL,HIGH --exit-code 0 .
+
+      - name: Scan IaC configurations for misconfigurations
+        run: |
+          trivy config --severity CRITICAL,HIGH --exit-code 0 .
