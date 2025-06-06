@@ -16,6 +16,7 @@ jobs:
       security-events: write
       actions: read
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     strategy:
       matrix:
@@ -62,8 +63,7 @@ jobs:
 
       - name: Generate SBOM (CycloneDX) for ${{ matrix.image }}
         run: |
-          trivy image --format cyclonedx --scanners vuln -o sbom-${{ steps.sanitize.outputs.filename }}.json ${{ matrix.image }}:latest
-
+          trivy image --format cyclonedx -o sbom-${{ steps.sanitize.outputs.filename }}.json ${{ matrix.image }}:latest
 
       - name: Upload SBOM as artifact
         uses: actions/upload-artifact@v4
@@ -74,7 +74,7 @@ jobs:
       - name: Detect secrets in repository
         run: |
           trivy secret --format sarif --output secrets-results.sarif .
-      
+
       - name: Upload secret scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
