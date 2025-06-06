@@ -62,7 +62,7 @@ jobs:
 
       - name: Generate SBOM (CycloneDX) for ${{ matrix.image }}
         run: |
-          trivy image --format cyclonedx -o sbom-${{ steps.sanitize.outputs.filename }}.json ${{ matrix.image }}:latest
+          trivy image --format cyclonedx --scanners vuln -o sbom-xyz.json image:tag
 
       - name: Upload SBOM as artifact
         uses: actions/upload-artifact@v4
