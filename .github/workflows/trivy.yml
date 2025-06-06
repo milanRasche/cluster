@@ -60,16 +60,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results-${{ steps.sanitize.outputs.filename }}.sarif'
-
-      - name: Generate SBOM (CycloneDX) for ${{ matrix.image }}
-        run: |
-          trivy image --format cyclonedx -o sbom-${{ steps.sanitize.outputs.filename }}.json ${{ matrix.image }}:latest
-
-      - name: Upload SBOM as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: sbom-${{ steps.sanitize.outputs.filename }}
-          path: sbom-${{ steps.sanitize.outputs.filename }}.json
       
       - name: Detect secrets in repository
         run: |
