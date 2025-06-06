@@ -61,9 +61,10 @@ jobs:
         with:
           sarif_file: 'trivy-results-${{ steps.sanitize.outputs.filename }}.sarif'
       
-      - name: Detect secrets in repository
+      - name: Detect secrets in repository and convert to SARIF
         run: |
-          trivy secret --format sarif --o secrets-results.sarif .
+          trivy secret --exit-code 0 --format json . > secrets.json
+          trivy convert --format sarif --input secrets.json --output secrets-results.sarif
 
       - name: Upload secret scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
