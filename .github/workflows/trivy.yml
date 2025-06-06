@@ -28,12 +28,13 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-  
-      - name: Install Trivy CLI
+
+      - name: Install Trivy CLI v0.63.0
         run: |
           sudo apt-get update
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.63.0
-
+          # Pin to v0.63.0 because that's what you tested
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
+            | sh -s -- -b /usr/local/bin v0.63.0
 
       - name: Set up Trivy cache
         uses: actions/cache@v4
@@ -51,33 +52,61 @@ jobs:
         uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
           image-ref: '${{ matrix.image }}:latest'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
+          format: sarif
           output: 'trivy-results-${{ steps.sanitize.outputs.filename }}.sarif'
           severity: 'CRITICAL,HIGH'
-          trivyignores: .trivyignore
+          trivyignore: .trivyignore
+        continue-on-error: true   # don’t fail the job if there are no results or a minor warning
+
+      - name: Verify SARIF exists (debug)
+        run: |
+          if [ ! -s trivy-results-${{ steps.sanitize.outputs.filename }}.sarif ]; then
+            echo "WARNING: SARIF is empty or missing!"
+            ls -l .
+            exit 1
+          fi
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results-${{ steps.sanitize.outputs.filename }}.sarif'
+          fail_on_error: false
 
-      - name: Detect secrets in repository (v0.60)
+      - name: Detect secrets in repository (v0.60 syntax)
         run: |
-            trivy fs --scanners secret --format json . > secrets.json
-            trivy convert --format sarif --input secrets.json --output secrets-results.sarif
+          trivy fs --scanners secret --format json . > secrets.json
+          trivy convert --format sarif --input secrets.json --output secrets-results.sarif
+        continue-on-error: true
+
+      - name: Verify secret SARIF exists (debug)
+        run: |
+          if [ ! -s secrets-results.sarif ]; then
+            echo "WARNING: secrets-results.sarif is empty or missing!"
+            ls -l .
+            exit 1
+          fi
 
       - name: Upload secret scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-         sarif_file: secrets-results.sarif
-    
+          sarif_file: secrets-results.sarif
+          fail_on_error: false
+
       - name: Scan IaC configurations for misconfigurations
         run: |
           trivy config --format sarif --output iac-results.sarif --severity CRITICAL,HIGH --exit-code 0 .
-      
+        continue-on-error: true
+
+      - name: Verify IaC SARIF exists (debug)
+        run: |
+          if [ ! -s iac-results.sarif ]; then
+            echo "WARNING: iac-results.sarif is empty or missing!"
+            ls -l .
+            exit 1
+          fi
+
       - name: Upload IaC scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: iac-results.sarif
-
+          fail_on_error: false
