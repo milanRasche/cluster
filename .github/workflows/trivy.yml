@@ -32,7 +32,8 @@ jobs:
       - name: Install Trivy CLI
         run: |
           sudo apt-get update
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.63.1
+
 
       - name: Set up Trivy cache
         uses: actions/cache@v4
@@ -63,14 +64,14 @@ jobs:
       
       - name: Detect secrets in repository and convert to SARIF
         run: |
-          trivy secret --exit-code 0 --format json . > secrets.json
-          trivy convert --format sarif --input secrets.json --output secrets-results.sarif
+            trivy secret . > secrets.json
+            trivy convert --format sarif --input secrets.json --output secrets-results.sarif
 
       - name: Upload secret scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: secrets-results.sarif
-      
+         sarif_file: secrets-results.sarif
+    
       - name: Scan IaC configurations for misconfigurations
         run: |
           trivy config --format sarif --output iac-results.sarif --severity CRITICAL,HIGH --exit-code 0 .
