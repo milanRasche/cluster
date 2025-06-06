@@ -58,16 +58,6 @@ jobs:
           trivyignore: .trivyignore
         continue-on-error: true
 
-      - name: Verify SARIF exists (debug)
-        id: verify_vuln
-        run: |
-          if [ ! -s trivy-results-${{ steps.sanitize.outputs.filename }}.sarif ]; then
-            echo "SARIF is empty or missing!" >&2
-            ls -l trivy-results-${{ steps.sanitize.outputs.filename }}.sarif
-            exit 1
-          fi
-          echo "exists=true" >> "$GITHUB_OUTPUT"
-
       - name: Upload Trivy scan results to GitHub Security tab
         if: ${{ steps.verify_vuln.outputs.exists == 'true' }}
         uses: github/codeql-action/upload-sarif@v3
@@ -80,15 +70,6 @@ jobs:
           trivy convert --format sarif --input secrets.json --output secrets-results.sarif
         continue-on-error: true
 
-      - name: Verify secret SARIF exists (debug)
-        id: verify_secrets
-        run: |
-          if [ ! -s secrets-results.sarif ]; then
-            echo "secrets-results.sarif is empty or missing!" >&2
-            ls -l secrets-results.sarif
-            exit 1
-          fi
-          echo "exists=true" >> "$GITHUB_OUTPUT"
 
       - name: Upload secret scan results to GitHub Security tab
         if: ${{ steps.verify_secrets.outputs.exists == 'true' }}
@@ -100,16 +81,6 @@ jobs:
         run: |
           trivy config --format sarif --output iac-results.sarif --severity CRITICAL,HIGH --exit-code 0 .
         continue-on-error: true
-
-      - name: Verify IaC SARIF exists (debug)
-        id: verify_iac
-        run: |
-          if [ ! -s iac-results.sarif ]; then
-            echo "iac-results.sarif is empty or missing!" >&2
-            ls -l iac-results.sarif
-            exit 1
-          fi
-          echo "exists=true" >> "$GITHUB_OUTPUT"
 
       - name: Upload IaC scan results to GitHub Security tab
         if: ${{ steps.verify_iac.outputs.exists == 'true' }}
