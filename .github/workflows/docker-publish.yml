@@ -9,7 +9,9 @@ on:
 
 jobs:
   build-and-push:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-latest
 
     strategy:
@@ -32,10 +34,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Inspect Cluster/ contents (for debugging)
+      # 1. YAML Lint & Schema Check (runs once per matrix entry)
+      - name: Install yamllint
         run: |
-          echo "---- Listing Cluster/ ----"
-          ls -R Cluster
+          python3 -m pip install --upgrade pip
+          pip install yamllint
+
+      - name: YAML Lint & Schema Check
+        run: |
+          yamllint docker-compose.yml
+          docker-compose config --quiet
+
+      # 2. Dockerfile linting (per service via matrix)
+      - name: Lint ${{ matrix.dockerfile }}
+        uses: hadolint/hadolint-action@v2
+        with:
+          dockerfile: ${{ matrix.dockerfile }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
