@@ -49,7 +49,7 @@ jobs:
     # 6. Generate coverage summary
     - name: Generate coverage summary
       run: |
-        ./Cluster/tools/reportgenerator \
+        ./tools/reportgenerator \
           "-reports:TestResults/Coverage/*.cobertura.xml" \
           "-reporttypes:TextSummary" \
           -verbosity:Error \
@@ -78,3 +78,7 @@ jobs:
       with:
         name: coverage-report
         path: Cluster/CoverageReport
+
+    - name: Check formatting and code style
+      run: dotnet format --verify-no-changes --severity info
+      working-directory: Cluster/
