@@ -25,20 +25,9 @@ jobs:
       run: dotnet restore Cluster.sln
       working-directory: Cluster/
 
+    # 4. Build
     - name: Build
       run: dotnet build --no-restore Cluster.sln --configuration Release
-      working-directory: Cluster/
-
-    # 4. Test + Coverage
-    - name: Test and collect coverage
-      run: |
-        dotnet test Cluster.sln \
-          --no-build \
-          --configuration Release \
-          --verbosity normal \
-          /p:CollectCoverage=true \
-          /p:CoverletOutputFormat=cobertura \
-          /p:CoverletOutput=TestResults/Coverage/
       working-directory: Cluster/
 
  # 5. Test and collect coverage
