@@ -8,27 +8,78 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+    # 1. Checkout
     - uses: actions/checkout@v4
+
+    # 2. Setup .NET SDK
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
+    # 3. Restore & Build
     - name: Restore dependencies
       run: dotnet restore Cluster.sln
       working-directory: Cluster/
-      
+
     - name: Build
-      run: dotnet build --no-restore Cluster.sln
-      working-directory: Cluster/
-      
-    - name: Test
-      run: dotnet test --no-build --verbosity normal Cluster.sln
+      run: dotnet build --no-restore Cluster.sln --configuration Release
       working-directory: Cluster/
 
+    # 4. Test + Coverage
+    - name: Test and collect coverage
+      run: |
+        dotnet test Cluster.sln \
+          --no-build \
+          --configuration Release \
+          --verbosity normal \
+          /p:CollectCoverage=true \
+          /p:CoverletOutputFormat=cobertura \
+          /p:CoverletOutput=TestResults/Coverage/
+      working-directory: Cluster/
+
+    # 5. Generate coverage summary
+    - name: Generate coverage summary
+      env:
+        PATH: $HOME/.dotnet/tools:$PATH
+      run: |
+        dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.* 
+        reportgenerator \
+          -reports:Cluster/TestResults/Coverage/coverage.cobertura.xml \
+          -reporttypes:TextSummary \
+          -verbosity:Error \
+          > coverage-summary.txt
+      working-directory: Cluster/
+
+    # 6. Upload coverage summary
+    - name: Upload coverage summary
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-summary
+        path: Cluster/coverage-summary.txt
+
+    # 7. Generate full HTML report
+    - name: Generate HTML coverage report
+      env:
+        PATH: $HOME/.dotnet/tools:$PATH
+      run: |
+        reportgenerator \
+          -reports:Cluster/TestResults/Coverage/coverage.cobertura.xml \
+          -targetdir:Cluster/CoverageReport \
+          -reporttypes:Html
+      working-directory: Cluster/
+
+    # 8. Publish HTML report
+    - name: Upload coverage-report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: Cluster/CoverageReport
+
+    # 9. Code Analysis & Metrics
     - name: Code Analysis
       continue-on-error: true
       run: dotnet format --verify-no-changes --severity info Cluster.sln
