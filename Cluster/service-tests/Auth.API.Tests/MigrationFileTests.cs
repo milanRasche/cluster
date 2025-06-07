@@ -11,7 +11,7 @@ namespace Auth.API.Tests
 {
     public class MigrationFileTests
     {
-        private const string ConnectionString = "Server=localhost,1433;Database=MigrationTestDb;User Id=sa;Password=TestPassword123;TrustServerCertificate=True;";
+        private const string ConnectionString = "Server=localhost,1433;Database=MigrationTestDb;User=sa;Password=TestPassword123;TrustServerCertificate=True;";
 
         [Fact]
         public async Task CanApplyMigrationsToSqlServer()
