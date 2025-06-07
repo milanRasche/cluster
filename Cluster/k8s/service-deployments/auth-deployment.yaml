@@ -5,8 +5,9 @@ metadata:
   name: auth
   labels:
     app: auth
+    version: "{{ GIT_SHA }}"
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: auth
@@ -46,18 +47,30 @@ spec:
                 secretKeyRef:
                   name: devcert
                   key: Jwt__Audience
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
           readinessProbe:
             httpGet:
               path: /health
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /health
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 5
+      terminationGracePeriodSeconds: 10
 ---
 apiVersion: v1
 kind: Service

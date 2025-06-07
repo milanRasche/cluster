@@ -5,7 +5,7 @@ metadata:
   labels:
     app: clusterfrontend
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: clusterfrontend
@@ -32,10 +32,18 @@ spec:
           volumeMounts:
             - name: certs
               mountPath: /app/certs
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
       volumes:
         - name: certs
           secret:
             secretName: devcert
+      terminationGracePeriodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
