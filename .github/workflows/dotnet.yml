@@ -59,7 +59,7 @@ jobs:
           -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
       working-directory: Cluster/
       env:
-        ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=MigrationTestDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True;"
+        ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=MigrationTestDb;User Id=sa;Password=TestPassword123;TrustServerCertificate=True;"
 
     # 7. Upload to Codecov
     - name: Upload coverage to Codecov
