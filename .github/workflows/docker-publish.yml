@@ -43,7 +43,7 @@ jobs:
       - name: Lint docker-compose.yml
         run: |
           yamllint Cluster/docker-compose.yml
-          docker-compose config --quiet
+          docker compose -f Cluster/docker-compose.yml config --quiet
 
       # 2. Dockerfile linting (per service via matrix)
       - name: Lint ${{ matrix.service }} Dockerfile
