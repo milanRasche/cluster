@@ -48,6 +48,7 @@ jobs:
 
        # 5. Generate Report
     - name: Generate coverage summary
+      working-directory: Cluster/
       run: |
         export PATH="$PATH:$(pwd)/tools"
         reportgenerator \
@@ -55,8 +56,6 @@ jobs:
           "-reporttypes:TextSummary" \
           -verbosity:Error \
           > coverage-summary.txt
-      working-directory: Cluster/
-
 
     # 7. Upload coverage summary
     - name: Upload coverage summary
@@ -64,6 +63,7 @@ jobs:
       with:
         name: coverage-summary
         path: Cluster/coverage-summary.txt
+
 
     # 8. Generate full HTML report
     - name: Generate HTML coverage report
@@ -81,6 +81,7 @@ jobs:
         name: coverage-report
         path: Cluster/CoverageReport
 
+    # 10. Linter and Stuff
     - name: Check formatting and code style
       run: dotnet format --verify-no-changes --severity info
       working-directory: Cluster/
