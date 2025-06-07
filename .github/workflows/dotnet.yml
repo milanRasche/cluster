@@ -41,40 +41,40 @@ jobs:
           /p:CoverletOutput=TestResults/Coverage/
       working-directory: Cluster/
 
-    #    # 5. Install ReportGenerator into Cluster/tools
-    # - name: Install ReportGenerator tool
-    #   run: dotnet tool install --tool-path tools dotnet-reportgenerator-globaltool --version 5.*
-    #   working-directory: Cluster/
+       # 5. Install ReportGenerator into Cluster/tools
+    - name: Install ReportGenerator tool
+      run: dotnet tool install --tool-path tools dotnet-reportgenerator-globaltool --version 5.*
+      working-directory: Cluster/
 
-    # # 6. Generate coverage summary
-    # - name: Generate coverage summary
-    #   run: |
-    #     ./tools/reportgenerator \
-    #       "-reports:TestResults/Coverage/*.cobertura.xml" \
-    #       "-reporttypes:TextSummary" \
-    #       -verbosity:Error \
-    #       > coverage-summary.txt
-    #   working-directory: Cluster/
+    # 6. Generate coverage summary
+    - name: Generate coverage summary
+      run: |
+        ./Cluster/tools/reportgenerator \
+          "-reports:TestResults/Coverage/*.cobertura.xml" \
+          "-reporttypes:TextSummary" \
+          -verbosity:Error \
+          > coverage-summary.txt
+      working-directory: Cluster/
 
-    # # 7. Upload coverage summary
-    # - name: Upload coverage summary
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: coverage-summary
-    #     path: Cluster/coverage-summary.txt
+    # 7. Upload coverage summary
+    - name: Upload coverage summary
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-summary
+        path: Cluster/coverage-summary.txt
 
-    # # 8. Generate full HTML report
-    # - name: Generate HTML coverage report
-    #   run: |
-    #     ./tools/reportgenerator \
-    #       "-reports:TestResults/Coverage/*.cobertura.xml" \
-    #       "-targetdir:CoverageReport" \
-    #       -reporttypes:Html
-    #   working-directory: Cluster/
+    # 8. Generate full HTML report
+    - name: Generate HTML coverage report
+      run: |
+        ./tools/reportgenerator \
+          "-reports:TestResults/Coverage/*.cobertura.xml" \
+          "-targetdir:CoverageReport" \
+          -reporttypes:Html
+      working-directory: Cluster/
 
-    # # 9. Upload HTML report
-    # - name: Upload coverage-report
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: coverage-report
-    #     path: Cluster/CoverageReport
+    # 9. Upload HTML report
+    - name: Upload coverage-report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: Cluster/CoverageReport
