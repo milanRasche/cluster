@@ -46,15 +46,16 @@ jobs:
       run: dotnet tool install --tool-path tools dotnet-reportgenerator-globaltool --version 5.*
       working-directory: Cluster/
 
+       # 5. Generate Report
     - name: Generate coverage summary
       run: |
+        export PATH="$PATH:$(pwd)/tools"
         reportgenerator \
           "-reports:TestResults/Coverage/*.cobertura.xml" \
           "-reporttypes:TextSummary" \
           -verbosity:Error \
           > coverage-summary.txt
       working-directory: Cluster/
-
 
     # 7. Upload coverage summary
     - name: Upload coverage summary
