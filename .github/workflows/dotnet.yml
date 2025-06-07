@@ -41,47 +41,26 @@ jobs:
           /p:CoverletOutput=TestResults/Coverage/
       working-directory: Cluster/
 
-       # 5. Install ReportGenerator into Cluster/tools
-    - name: Install ReportGenerator tool
-      run: dotnet tool install --tool-path tools dotnet-reportgenerator-globaltool --version 5.*
-      working-directory: Cluster/
-
-       # 5. Generate Report
-    - name: Generate coverage summary
-      working-directory: Cluster/
+ # 5. Test and collect coverage
+    - name: Run tests with coverage
       run: |
-        export PATH="$PATH:$(pwd)/tools"
-        reportgenerator \
-          "-reports:TestResults/Coverage/*.cobertura.xml" \
-          "-reporttypes:TextSummary" \
-          -verbosity:Error \
-          > coverage-summary.txt
-
-    # 7. Upload coverage summary
-    - name: Upload coverage summary
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-summary
-        path: Cluster/coverage-summary.txt
-
-
-    # 8. Generate full HTML report
-    - name: Generate HTML coverage report
-      run: |
-        ./tools/reportgenerator \
-          "-reports:TestResults/Coverage/*.cobertura.xml" \
-          "-targetdir:CoverageReport" \
-          -reporttypes:Html
+        dotnet test Cluster.sln \
+          --no-build \
+          --configuration Release \
+          --collect:"XPlat Code Coverage" \
+          --results-directory TestResults \
+          -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
       working-directory: Cluster/
 
-    # 9. Upload HTML report
-    - name: Upload coverage-report
-      uses: actions/upload-artifact@v4
+    # 6. Upload to Codecov
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
       with:
-        name: coverage-report
-        path: Cluster/CoverageReport
+        files: Cluster/TestResults/**/coverage.cobertura.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
 
-    # 10. Linter and Stuff
+    # 7. Linter and Stuff
     - name: Check formatting and code style
       run: dotnet format --verify-no-changes --severity info
       working-directory: Cluster/
