@@ -10,6 +10,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          SA_PASSWORD: "Your_password123"
+          ACCEPT_EULA: "Y"
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "echo 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     # 1. Checkout
     - uses: actions/checkout@v4
@@ -20,17 +34,21 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    # 3. Restore & Build
+    # 3. Wait for SQL Server to be ready (optional, but safer)
+    - name: Wait for SQL Server
+      run: sleep 15
+
+    # 4. Restore dependencies
     - name: Restore dependencies
       run: dotnet restore Cluster.sln
       working-directory: Cluster/
 
-    # 4. Build
+    # 5. Build
     - name: Build
       run: dotnet build --no-restore Cluster.sln --configuration Release
       working-directory: Cluster/
 
- # 5. Test and collect coverage
+    # 6. Test and collect coverage
     - name: Run tests with coverage
       run: |
         dotnet test Cluster.sln \
@@ -40,8 +58,10 @@ jobs:
           --results-directory TestResults \
           -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
       working-directory: Cluster/
+      env:
+        ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=MigrationTestDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True;"
 
-    # 6. Upload to Codecov
+    # 7. Upload to Codecov
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
       with:
@@ -49,8 +69,7 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         fail_ci_if_error: true
 
-    # 7. Linter and Stuff
+    # 8. Linter and Stuff
     - name: Check formatting and code style
       run: dotnet format Cluster.sln --verify-no-changes --severity info
       working-directory: Cluster/
-
