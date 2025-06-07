@@ -33,7 +33,7 @@ services:
       ASPNETCORE_HTTPS_PORT: 8081
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/devcert.pfx
       ASPNETCORE_Kestrel__Certificates__Default__Password: password
-      ReverseProxy__Clusters__auth_cluster__Destinations__auth_api__Address: 
+      ReverseProxy__Clusters__auth_cluster__Destinations__auth_api__Address:
         http://auth.api:8080/
     networks:
       - cluster_network
@@ -82,9 +82,9 @@ services:
     ports:
       - "1433:1433"
     healthcheck:
-      test: 
-        ["CMD-SHELL", 
-        "/opt/mssql-tools/bin/sqlcmd -U sa -P \"$SA_PASSWORD\" -Q \"SELECT 1\""]
+      test:
+        ["CMD-SHELL",
+         "/opt/mssql-tools/bin/sqlcmd -U sa -P \"$SA_PASSWORD\" -Q \"SELECT 1\""]
       interval: 30s
       timeout: 5s
       retries: 5
@@ -104,7 +104,7 @@ services:
     networks:
       cluster_network:
         aliases:
-        - auth-db
+          - auth-db
 
   clusterfrontend:
     build:
