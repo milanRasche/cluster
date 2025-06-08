@@ -341,7 +341,7 @@ namespace Auth.API.Tests
             // Validate the JWT signature and claims using our test key
             var tokenHandler = new JwtSecurityTokenHandler();
             var config = _factory.Services.GetRequiredService<IConfiguration>();
-            var key = Encoding.UTF8.GetBytes(config["Jwt:Key"]);
+            var key = Encoding.UTF8.GetBytes(config["Jwt:Key"]!);
             tokenHandler.ValidateToken(
                 newJwt,
                 new TokenValidationParameters
@@ -594,12 +594,12 @@ namespace Auth.API.Tests
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public async Task Logout_MissingToken_ReturnsBadRequest(string tokenValue)
+        public async Task Logout_MissingToken_ReturnsBadRequest(string? tokenValue)
         {
             // Arrange
             var logoutDto = new RefreshTokenRequest
             {
-                RefreshToken = tokenValue
+                RefreshToken = tokenValue!
             };
 
             // Act
