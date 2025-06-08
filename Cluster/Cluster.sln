@@ -36,8 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{74
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{75C51044-CF78-40F3-8872-C875EDB11776}"
 	ProjectSection(SolutionItems) = preProject
-		k8s\ingress.yaml = k8s\ingress.yaml
 		k8s\authdb-deployment.yaml = k8s\authdb-deployment.yaml
+		k8s\ingress.yaml = k8s\ingress.yaml
 		k8s\secrets.yaml = k8s\secrets.yaml
 	EndProjectSection
 EndProject
@@ -46,6 +46,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service-deployments", "serv
 		k8s\service-deployments\auth-deployment.yaml = k8s\service-deployments\auth-deployment.yaml
 		k8s\service-deployments\clusterfrontend-deployment.yaml = k8s\service-deployments\clusterfrontend-deployment.yaml
 		k8s\service-deployments\gateway-deployment.yaml = k8s\service-deployments\gateway-deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hpa", "hpa", "{2BDB1C25-26C4-4728-B2C0-9058AB67BB02}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\hpa\auth-hpa.yaml = k8s\hpa\auth-hpa.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "load-testing", "load-testing", "{B968A303-E017-43DE-B68F-5E14AE5A2554}"
+	ProjectSection(SolutionItems) = preProject
+		load-testing\auth-load-test.js = load-testing\auth-load-test.js
+		load-testing\k6-load-test-job.yaml = load-testing\k6-load-test-job.yaml
+		load-testing\k6-script-configmap.yaml = load-testing\k6-script-configmap.yaml
 	EndProjectSection
 EndProject
 Global
@@ -104,6 +116,7 @@ Global
 		{475EDD76-FC64-48F7-A6DD-C547839AFC99} = {74B79BAF-F510-4B5D-B08C-365D21AD75D1}
 		{A605B2FC-3CB3-407B-BCC0-D428C4C4CAA1} = {74B79BAF-F510-4B5D-B08C-365D21AD75D1}
 		{811CC1E5-A8AC-472C-AFBF-37DDA227BCC0} = {75C51044-CF78-40F3-8872-C875EDB11776}
+		{2BDB1C25-26C4-4728-B2C0-9058AB67BB02} = {75C51044-CF78-40F3-8872-C875EDB11776}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4366A080-6A4B-4603-92F2-3430A146C3DA}

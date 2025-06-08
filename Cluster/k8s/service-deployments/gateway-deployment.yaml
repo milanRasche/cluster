@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: milanfontys/cluster_gateway_service:{{ GIT_SHA }}
+          # image: milanfontys/cluster_gateway_service:{{ GIT_SHA }}
+          image: milanfontys/cluster_gateway_service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
