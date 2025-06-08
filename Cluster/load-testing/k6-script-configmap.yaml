@@ -8,17 +8,39 @@ data:
     import { check, sleep } from 'k6';
 
     export let options = {
-      stages: [
-        { duration: '30s', target: 10 },
-        { duration: '1m', target: 50 },
-        { duration: '30s', target: 0 },
-      ],
+        stages: [
+            { duration: '1m', target: 0 },
+            { duration: '1m', target: 10 },
+            { duration: '1m', target: 20 },
+            { duration: '1m', target: 40 },
+            { duration: '1m', target: 80 },
+            { duration: '1m', target: 200 },
+            { duration: '1m', target: 100 },
+            { duration: '1m', target: 40 },
+            { duration: '1m', target: 20 },
+            { duration: '5m', target: 10 },
+            { duration: '1m', target: 0 },
+        ],
     };
 
     export default function () {
-      const res = http.get('http://auth/health');
-      check(res, {
-        'status is 200': (r) => r.status === 200,
-      });
-      sleep(1);
+        const url = 'http://auth/UserAuth/login';
+        const payload = JSON.stringify({
+            UserEmail: '1234@1234.1234',
+            Password: '1234@1234.1234'
+        });
+
+        const headers = { 'Content-Type': 'application/json' };
+
+        const res = http.post(url, payload, { headers });
+
+        check(res, {
+            'status is 200': (r) => r.status === 200,
+            'token received': (r) => !!r.json('JWTToken'),
+            'response time < 500ms': (r) => r.timings.duration < 500,
+        });
+
+        sleep(1);
     }
+
+    
