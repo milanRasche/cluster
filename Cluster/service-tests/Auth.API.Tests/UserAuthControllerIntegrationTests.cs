@@ -67,17 +67,11 @@ namespace Auth.API.Tests
         }
     }
 
-    public class UserAuthControllerIntegrationTests
-        : IClassFixture<CustomWebApplicationFactory<Program>>
+    public class UserAuthControllerIntegrationTests(CustomWebApplicationFactory<Program> factory)
+                : IClassFixture<CustomWebApplicationFactory<Program>>
     {
-        private readonly HttpClient _client;
-        private readonly CustomWebApplicationFactory<Program> _factory;
-
-        public UserAuthControllerIntegrationTests(CustomWebApplicationFactory<Program> factory)
-        {
-            _factory = factory;
-            _client = factory.CreateClient();
-        }
+        private readonly HttpClient _client = factory.CreateClient();
+        private readonly CustomWebApplicationFactory<Program> _factory = factory;
 
         private static StringContent ToJsonContent(object obj)
         {
@@ -387,9 +381,9 @@ namespace Auth.API.Tests
 
 
         [Theory]
-        [InlineData("", "Token required.")]
-        [InlineData(null, "Token required.")]
-        public async Task RefreshToken_MissingToken_ReturnsBadRequest(string tokenValue, string expectedMessage)
+        [InlineData("")]
+        [InlineData(null)]
+        public async Task RefreshToken_MissingToken_ReturnsBadRequest(string tokenValue)
         {
             // Arrange
             var refreshDto = new RefreshTokenRequest
@@ -598,9 +592,9 @@ namespace Auth.API.Tests
         }
 
         [Theory]
-        [InlineData("", "Refresh token required.")]
-        [InlineData(null, "Refresh token required.")]
-        public async Task Logout_MissingToken_ReturnsBadRequest(string tokenValue, string expectedMessage)
+        [InlineData("")]
+        [InlineData(null)]
+        public async Task Logout_MissingToken_ReturnsBadRequest(string tokenValue)
         {
             // Arrange
             var logoutDto = new RefreshTokenRequest
