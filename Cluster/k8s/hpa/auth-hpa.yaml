@@ -7,8 +7,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: auth
-  minReplicas: 2
-  maxReplicas: 7
+  minReplicas: 1
+  maxReplicas: 4
   metrics:
     - type: Resource
       resource:
@@ -22,13 +22,13 @@ spec:
       selectPolicy: Max
       policies:
         - type: Pods
-          value: 3
+          value: 2
           periodSeconds: 15
     scaleDown:
       stabilizationWindowSeconds: 30
       selectPolicy: Max
       policies:
         - type: Pods
-          value: 2
+          value: 1
           periodSeconds: 30
 
