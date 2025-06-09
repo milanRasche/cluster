@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: auth
   minReplicas: 2
-  maxReplicas: 5
+  maxReplicas: 7
   metrics:
     - type: Resource
       resource:
@@ -16,4 +16,19 @@ spec:
         target:
           type: Utilization
           averageUtilization: 75
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 10
+      selectPolicy: Max
+      policies:
+        - type: Pods
+          value: 3
+          periodSeconds: 15
+    scaleDown:
+      stabilizationWindowSeconds: 30
+      selectPolicy: Max
+      policies:
+        - type: Pods
+          value: 2
+          periodSeconds: 30
 
