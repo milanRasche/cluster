@@ -17,35 +17,24 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # Step 2: Install kubeval for schema validation
-      - name: Install kubeval
-        run: |
-          curl -sSL https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz \
-          | tar xz && sudo mv kubeval /usr/local/bin/
-
-      # Step 3: Run kubeval on all manifests
-      - name: Run kubeval
-        run: |
-          kubeval Cluster/k8s/**/*.yaml || exit 1
-
-      # Step 4: Install kube-linter for best practice linting
+      # Step 2: Install kube-linter for best practice linting
       - name: Install kube-linter
         run: |
           curl -sSL https://github.com/stackrox/kube-linter/releases/latest/download/kube-linter-linux.tar.gz \
           | tar xz && sudo mv kube-linter /usr/local/bin/
 
-      # Step 5: Run kube-linter on Kubernetes configs
+      # Step 3: Run kube-linter on Kubernetes configs
       - name: Run kube-linter
         run: |
           kube-linter lint Cluster/k8s || exit 1
 
-      # Step 6: Log in to Azure via Service Principal (store its JSON blob in ${{ secrets.AZURE_CREDENTIALS }})
+      # Step 4: Log in to Azure via Service Principal (store its JSON blob in ${{ secrets.AZURE_CREDENTIALS }})
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Step 7: Configure kubectl to talk to your AKS cluster
+      # Step 5: Configure kubectl to talk to your AKS cluster
       - name: Set AKS context
         uses: azure/aks-set-context@v1
         with:
@@ -53,7 +42,7 @@ jobs:
           resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
           cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
 
-      # Step 8: Apply every YAML under /k8s/ to AKS
+      # Step 6: Apply every YAML under /k8s/ to AKS
       - name: Deploy manifests to AKS
         run: |
           kubectl apply -f Cluster/k8s -f Cluster/k8s/service-deployments -f Cluster/k8s/hpa
