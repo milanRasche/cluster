@@ -355,7 +355,7 @@ namespace Auth.API.Tests
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 },
-                validatedToken: out _
+                validatedToken: out SecurityToken _
             );
 
             // Finally, check that the old token was marked revoked, and a new RefreshToken was created
