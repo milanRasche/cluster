@@ -44,7 +44,17 @@ jobs:
           resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
           cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
 
-      # Step 6: Apply every YAML under /k8s/ to AKS
+      - name: Set image tag from SHA
+        run: echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
+
+      - name: Replace {{ GIT_SHA }} in YAMLs
+        run: |
+          mkdir -p rendered
+          for file in Cluster/k8s/*.yaml Cluster/k8s/service-deployments/*.yaml Cluster/k8s/hpa/*.yaml; do
+            envsubst < "$file" > "rendered/$(basename $file)"
+          done
+
       - name: Deploy manifests to AKS
         run: |
-          kubectl apply -f Cluster/k8s -f Cluster/k8s/service-deployments -f Cluster/k8s/hpa
+          kubectl apply -f rendered
+

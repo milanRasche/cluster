@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: milanfontys/cluster_auth_service:{{ GIT_SHA }}
+          image: milanfontys/cluster_auth_service:${GIT_SHA}
           # image: milanfontys/cluster_auth_service:latest
           imagePullPolicy: Always
           ports:

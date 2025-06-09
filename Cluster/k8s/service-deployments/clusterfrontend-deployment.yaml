@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: milanfontys/cluster_frontend:{{ GIT_SHA }}
+          image: milanfontys/cluster_frontend:${GIT_SHA}
           # image: milanfontys/cluster_frontend:latest
           imagePullPolicy: Always
           ports:
