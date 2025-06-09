@@ -51,6 +51,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hpa", "hpa", "{2BDB1C25-26C4-4728-B2C0-9058AB67BB02}"
 	ProjectSection(SolutionItems) = preProject
 		k8s\hpa\auth-hpa.yaml = k8s\hpa\auth-hpa.yaml
+		k8s\hpa\clusterfrontend-hpa.yaml = k8s\hpa\clusterfrontend-hpa.yaml
+		k8s\hpa\gateway-hpa.yaml = k8s\hpa\gateway-hpa.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "load-testing", "load-testing", "{B968A303-E017-43DE-B68F-5E14AE5A2554}"
