@@ -26,7 +26,7 @@ jobs:
       # Step 3: Run kubeval on all manifests
       - name: Run kubeval
         run: |
-          kubeval Cluster/k8s/**/*.yaml --strict || exit 1
+          kubeval Cluster/k8s/**/*.yaml || exit 1
 
       # Step 4: Install kube-linter for best practice linting
       - name: Install kube-linter

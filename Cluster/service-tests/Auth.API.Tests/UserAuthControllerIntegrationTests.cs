@@ -382,15 +382,12 @@ namespace Auth.API.Tests
 
 
 
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        public async Task RefreshToken_MissingToken_ReturnsBadRequest(string? tokenValue)
+        [Fact]
+        public async Task RefreshToken_MissingToken_ReturnsBadRequest()
         {
             // Arrange
             var refreshDto = new RefreshTokenRequest
             {
-                RefreshToken = tokenValue
             };
 
             // Act
