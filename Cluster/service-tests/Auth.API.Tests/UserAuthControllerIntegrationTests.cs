@@ -341,7 +341,9 @@ namespace Auth.API.Tests
             // Validate the JWT signature and claims using our test key
             var tokenHandler = new JwtSecurityTokenHandler();
             var config = _factory.Services.GetRequiredService<IConfiguration>();
-            var key = Encoding.UTF8.GetBytes(config["Jwt:Key"]!);
+            var jwtKey = config["Jwt:Key"];
+            Assert.False(string.IsNullOrEmpty(jwtKey));
+            var key = Encoding.UTF8.GetBytes(jwtKey!);
             tokenHandler.ValidateToken(
                 newJwt,
                 new TokenValidationParameters
